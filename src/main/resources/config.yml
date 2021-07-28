@@ -1,0 +1,30 @@
+#
+# ███╗░░░███╗██████╗░░█████╗░██████╗░██████╗░███████╗██████╗░
+# ████╗░████║██╔══██╗██╔══██╗██╔══██╗██╔══██╗██╔════╝██╔══██╗
+# ██╔████╔██║██████╦╝██║░░██║██████╔╝██║░░██║█████╗░░██████╔╝
+# ██║╚██╔╝██║██╔══██╗██║░░██║██╔══██╗██║░░██║██╔══╝░░██╔══██╗
+# ██║░╚═╝░██║██████╦╝╚█████╔╝██║░░██║██████╔╝███████╗██║░░██║
+# ╚═╝░░░░░╚═╝╚═════╝░░╚════╝░╚═╝░░╚═╝╚═════╝░╚══════╝╚═╝░░╚═╝
+#
+#        A plugin that will mimic the mechanics of the
+#    Minehut server "Wife"'s WorldBorder (wife.minehut.gg)
+#
+
+enabled: true
+# Set this value to 'false' if you want the plugin to disable itself upon starting up
+# NOTE: This requires a restart to take effect
+
+worldBorderSize: 100.0
+# The size the WorldBorder will constantly be at.
+
+worldBorderColor: BLUE
+# The color of the WorldBorder, possible colors are 'RED', 'BLUE', and 'GREEN'
+
+howOftenWorldBorderMoves: 2.0
+# How often the WorldBorder will move, this value is in SECONDS
+
+
+
+
+configVersion: 1.0.0
+# Do not change!!!!!

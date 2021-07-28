@@ -1,0 +1,13 @@
+name: MBorder
+version: ${project.version}
+main: net.cybercake.mborder.Main
+api-version: 1.17
+authors: [ CyberedCake ]
+description: A recreation of the Minehut server "Wife"'s moving border mechanics
+website: https://twitter.com/trueCyberCake
+
+commands:
+  mborder:
+    description: The main command for the plugin MBorder
+    usage: Use /mborder help for help!
+    aliases: [movingborder, mb]
