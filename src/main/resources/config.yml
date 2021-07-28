@@ -20,9 +20,14 @@ worldBorderSize: 100.0
 worldBorderColor: BLUE
 # The color of the WorldBorder, possible colors are 'RED', 'BLUE', and 'GREEN'
 
-howOftenWorldBorderMoves: 2.0
-# How often the WorldBorder will move, this value is in SECONDS
+howWorldBorderMoves: PIG
+# The mob that will be in the middle of the WorldBorder
 
+worldBorderAnimalName: '&b&lWorldBorder Center'
+# The name of the mob at the center, set to 'empty' to remain none
+
+worldBorderAnimalGlowing: true
+# Determines if the WorldBorder animal will glow or not
 
 
 

@@ -6,6 +6,20 @@ authors: [ CyberedCake ]
 description: A recreation of the Minehut server "Wife"'s moving border mechanics
 website: https://twitter.com/trueCyberCake
 
+permissions:
+  mborder.*:
+    description: Allowing a player this permission will give them all permissions for the MBorder plugin
+    default: op
+    children:
+      - mborder.reload
+      - mborder.distancebetween
+  mborder.reload:
+    description: Allowing a player this permission will give them the ability to use /mborder reload
+    default: op
+  mborder.distancebetween:
+    description: Allowing a player this permission will give them the ability to use /mborder distancebetween
+    default: op
+
 commands:
   mborder:
     description: The main command for the plugin MBorder

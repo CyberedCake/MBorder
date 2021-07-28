@@ -10,6 +10,7 @@ import org.bukkit.entity.Player;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.util.Date;
@@ -107,6 +108,13 @@ public class Utils {
         }
         String name = prefix + p.getName() + suffix;
         return name;
+    }
+
+    public static String formatLong(long longNumber) {
+        NumberFormat numberFormat = NumberFormat.getInstance();
+        numberFormat.setGroupingUsed(true);
+
+        return numberFormat.format(longNumber);
     }
 
     public static String getFormattedName(Player p, String prefixIfDefault) {
