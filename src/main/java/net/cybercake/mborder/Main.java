@@ -2,6 +2,7 @@ package net.cybercake.mborder;
 
 import net.cybercake.mborder.Commands.CommandListeners;
 import net.cybercake.mborder.Commands.CommandManager;
+import net.cybercake.mborder.Utils.DataUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.TabCompleter;
@@ -23,6 +24,9 @@ public final class Main extends JavaPlugin {
         if(!getConfig().getBoolean("enabled")) {
             disablePlugin();
             return;
+        }
+        if(!getConfig().getBoolean("persistent")) {
+            DataUtils.setCustomYml("data", "server.active", false);
         }
 
         saveDefaultConfig();
