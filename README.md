@@ -9,12 +9,14 @@ All downloads for the plugin can be found on the [releases page](https://github.
 `/mborder help` - Prints a help message with all commands and descriptions, hover over a command for information 
 about that command.
 
-`/mborder reload` - Reloads the configuration file for this plugin. **[Permission: mborder.reload]**
+`/mborder reload` - Reloads the configuration file for this plugin. **[Permission: mborder.command.reload]**
 
-`/mborder toggleactive` - Start or stop the game. **[Permission: mborder.toggleactive]**
+`/mborder toggleactive` - Start or stop the game. **[Permission: mborder.command.toggleactive]**
+
+`/mborder distancebetween <x> <y> <z>` - Find the distance between you and a certain locatio. **[Permission: mborder.command.distancebetween]**
 
 `/mborder update` - Checks if there is an update to the plugin. If there is, it will provide a download link to the latest version. **[Permission:
-mborder.update]**
+mborder.command.update]**
 
 ## Contact Me
 Need to contact me for some reason? View below!
