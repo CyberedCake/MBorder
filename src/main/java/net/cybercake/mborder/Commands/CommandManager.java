@@ -3,7 +3,7 @@ package net.cybercake.mborder.Commands;
 import net.cybercake.mborder.Commands.SubCommands.DistanceBetween;
 import net.cybercake.mborder.Commands.SubCommands.Help;
 import net.cybercake.mborder.Commands.SubCommands.Reload;
-import net.cybercake.mborder.Commands.SubCommands.Start;
+import net.cybercake.mborder.Commands.SubCommands.ToggleActive;
 import net.cybercake.mborder.Utils.Utils;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.chat.*;
@@ -33,7 +33,7 @@ public class CommandManager implements CommandExecutor, TabCompleter {
         subcommands.add(new Help());
         subcommands.add(new Reload());
         subcommands.add(new DistanceBetween());
-        subcommands.add(new Start());
+        subcommands.add(new ToggleActive());
     }
 
     @Override
@@ -83,19 +83,27 @@ public class CommandManager implements CommandExecutor, TabCompleter {
         return true;
     }
 
+    public SubCommand getSubCommand(String subCommandName) {
+        for(SubCommand command : getSubcommands()) {
+            if(command.getName().equalsIgnoreCase(subCommandName)) {
+                return command;
+            }
+        }
+        return null;
+    }
 
     public void printHelpMsg(CommandSender sender) {
         if(sender instanceof Player) {
             sender.sendMessage(Utils.getSeperator(ChatColor.BLUE));
         }
         Utils.sendCenteredMessage(sender, "&d&l" + pluginTitle + " COMMANDS:");
-        for(SubCommand cmd : getSubcommands()) {
+        for(String cmdStr : getSubCommandsOnlyWithPerms(sender)) {
             if(sender.hasPermission(pluginPermission + ".*")) {
-                printHelpMsgSpecific(sender, cmd.getDescription(), cmd.getUsage(), cmd.getPermission());
-            }else if (cmd.getPermission().equalsIgnoreCase("")) {
-                printHelpMsgSpecific(sender, cmd.getDescription(), cmd.getUsage(), cmd.getPermission());
-            } else if (!cmd.getPermission().equalsIgnoreCase("") && sender.hasPermission(cmd.getPermission())) {
-                printHelpMsgSpecific(sender, cmd.getDescription(), cmd.getUsage(), cmd.getPermission());
+                printHelpMsgSpecific(sender, getSubCommand(cmdStr).getDescription(), getSubCommand(cmdStr).getUsage(), getSubCommand(cmdStr).getPermission());
+            }else if (getSubCommand(cmdStr).getPermission().equalsIgnoreCase("")) {
+                printHelpMsgSpecific(sender, getSubCommand(cmdStr).getDescription(), getSubCommand(cmdStr).getUsage(), getSubCommand(cmdStr).getPermission());
+            } else if (!getSubCommand(cmdStr).getPermission().equalsIgnoreCase("") && sender.hasPermission(getSubCommand(cmdStr).getPermission())) {
+                printHelpMsgSpecific(sender, getSubCommand(cmdStr).getDescription(), getSubCommand(cmdStr).getUsage(), getSubCommand(cmdStr).getPermission());
             }
         }
         if(sender instanceof Player) {
