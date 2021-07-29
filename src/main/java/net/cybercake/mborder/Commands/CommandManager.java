@@ -3,6 +3,7 @@ package net.cybercake.mborder.Commands;
 import net.cybercake.mborder.Commands.SubCommands.DistanceBetween;
 import net.cybercake.mborder.Commands.SubCommands.Help;
 import net.cybercake.mborder.Commands.SubCommands.Reload;
+import net.cybercake.mborder.Commands.SubCommands.Start;
 import net.cybercake.mborder.Utils.Utils;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.chat.*;
@@ -32,6 +33,7 @@ public class CommandManager implements CommandExecutor, TabCompleter {
         subcommands.add(new Help());
         subcommands.add(new Reload());
         subcommands.add(new DistanceBetween());
+        subcommands.add(new Start());
     }
 
     @Override
