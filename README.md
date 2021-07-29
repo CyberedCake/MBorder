@@ -11,6 +11,8 @@ about that command.
 
 `/mborder reload` - Reloads the configuration file for this plugin. **[Permission: mborder.reload]**
 
+`/mborder toggleactive` - Start or stop the game. **[Permission: mborder.toggleactive]**
+
 `/mborder update` - Checks if there is an update to the plugin, and it will provide a download link if you are not 
 up-to-date. **[Permission:
 mborder.update]**
