@@ -15,6 +15,7 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
@@ -99,11 +100,11 @@ public class CommandManager implements CommandExecutor, TabCompleter {
         Utils.sendCenteredMessage(sender, "&d&l" + pluginTitle + " COMMANDS:");
         for(String cmdStr : getSubCommandsOnlyWithPerms(sender)) {
             if(sender.hasPermission(pluginPermission + ".*")) {
-                printHelpMsgSpecific(sender, getSubCommand(cmdStr).getDescription(), getSubCommand(cmdStr).getUsage(), getSubCommand(cmdStr).getPermission());
+                printHelpMsgSpecific(sender, getSubCommand(cmdStr).getDescription(), getSubCommand(cmdStr).getUsage(), getSubCommand(cmdStr).getPermission(), Arrays.toString(getSubCommand(cmdStr).getAliases()));
             }else if (getSubCommand(cmdStr).getPermission().equalsIgnoreCase("")) {
-                printHelpMsgSpecific(sender, getSubCommand(cmdStr).getDescription(), getSubCommand(cmdStr).getUsage(), getSubCommand(cmdStr).getPermission());
+                printHelpMsgSpecific(sender, getSubCommand(cmdStr).getDescription(), getSubCommand(cmdStr).getUsage(), getSubCommand(cmdStr).getPermission(), Arrays.toString(getSubCommand(cmdStr).getAliases()));
             } else if (!getSubCommand(cmdStr).getPermission().equalsIgnoreCase("") && sender.hasPermission(getSubCommand(cmdStr).getPermission())) {
-                printHelpMsgSpecific(sender, getSubCommand(cmdStr).getDescription(), getSubCommand(cmdStr).getUsage(), getSubCommand(cmdStr).getPermission());
+                printHelpMsgSpecific(sender, getSubCommand(cmdStr).getDescription(), getSubCommand(cmdStr).getUsage(), getSubCommand(cmdStr).getPermission(), Arrays.toString(getSubCommand(cmdStr).getAliases()));
             }
         }
         if(sender instanceof Player) {
@@ -111,13 +112,18 @@ public class CommandManager implements CommandExecutor, TabCompleter {
         }
     }
 
-    private static void printHelpMsgSpecific(CommandSender sender, String description, String usage, String permission) {
+    private static void printHelpMsgSpecific(CommandSender sender, String description, String usage, String permission, String aliases) {
         if(permission.equalsIgnoreCase("")) {
             permission = "Everyone";
         }
+
+        String ifAliases = "";
+        if(!aliases.equalsIgnoreCase("[]")) {
+            ifAliases = "\n&6Aliases: &f" + aliases;
+        }
         BaseComponent component = new TextComponent(Utils.chat("&b" + usage));
         component.setClickEvent(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, usage));
-        component.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(Utils.chat("&6Command: &f" + usage + "\n&6Description: &f" + description + "\n&6Permission: &f" + permission)).create()));
+        component.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(Utils.chat("&6Command: &f" + usage + "\n&6Description: &f" + description + "\n&6Permission: &f" + permission + ifAliases)).create()));
         sender.spigot().sendMessage(component);
     }
 
