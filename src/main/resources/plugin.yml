@@ -4,7 +4,7 @@ main: net.cybercake.mborder.Main
 api-version: 1.17
 authors: [ CyberedCake ]
 description: A recreation of the Minehut server "Wife"'s moving border mechanics
-website: https://twitter.com/trueCyberCake
+website: https://github.com/CyberedCake/MBorder
 
 permissions:
   mborder.*:
