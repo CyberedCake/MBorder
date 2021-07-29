@@ -21,6 +21,8 @@ public final class Main extends JavaPlugin {
     public void onEnable() {
         plugin = this;
 
+        saveResource("data.yml", false);
+
         if(!getConfig().getBoolean("enabled")) {
             disablePlugin();
             return;
