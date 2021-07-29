@@ -13,7 +13,7 @@ about that command.
 
 `/mborder toggleactive` - Start or stop the game. **[Permission: mborder.command.toggleactive]**
 
-`/mborder distancebetween <x> <y> <z>` - Find the distance between you and a certain locatio. **[Permission: mborder.command.distancebetween]**
+`/mborder distancebetween <x> <y> <z>` - Find the distance between you and a certain location, similar to /coordcalc on Wife.minehut.gg. **[Permission: mborder.command.distancebetween]**
 
 `/mborder update` - Checks if there is an update to the plugin. If there is, it will provide a download link to the latest version. **[Permission:
 mborder.command.update]**
