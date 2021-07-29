@@ -15,7 +15,7 @@ enabled: true
 # NOTE: This requires a restart to take effect
 
 worldBorderSize: 100.0
-# The size the WorldBorder will constantly be at.
+# The size the WorldBorder will constantly be at
 
 worldBorderColor: BLUE
 # The color of the WorldBorder, possible colors are 'RED', 'BLUE', and 'GREEN'
@@ -29,6 +29,9 @@ worldBorderAnimalName: '&b&lWorldBorder Center'
 worldBorderAnimalGlowing: true
 # Determines if the WorldBorder animal will glow or not
 
+persistent: true
+# Determines if the WorldBorder location, enabled status, etc. will be persistent
+# through restarts and server shut-downs
 
 
 configVersion: 1.0.0
