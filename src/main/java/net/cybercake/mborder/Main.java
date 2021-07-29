@@ -20,6 +20,11 @@ public final class Main extends JavaPlugin {
     public void onEnable() {
         plugin = this;
 
+        if(!getConfig().getBoolean("enabled")) {
+            disablePlugin();
+            return;
+        }
+
         saveDefaultConfig();
         reloadConfig();
 
@@ -39,6 +44,15 @@ public final class Main extends JavaPlugin {
     public static Main getPlugin() { return plugin; }
 
     public static FileConfiguration getMainConfig() { return plugin.getConfig(); }
+
+    public static void disablePlugin() {
+        getPlugin(Main.class).getPluginLoader().disablePlugin(plugin);
+        Bukkit.getLogger().severe(" ");
+        Bukkit.getLogger().severe("The plugin MBorder has been disabled due to the setting set in the configuration file!");
+        Bukkit.getLogger().severe(" ");
+        Bukkit.getLogger().severe("Go to the config and change 'enabled' to 'true' to enable this plugin, then restart the server.");
+        Bukkit.getLogger().severe(" ");
+    }
 
     public static void registerCommand(String name, CommandExecutor commandExecutor) { plugin.getCommand(name).setExecutor(commandExecutor); }
     public static void registerTabCompleter(String name, TabCompleter tabCompleter) { plugin.getCommand(name).setTabCompleter(tabCompleter); }
