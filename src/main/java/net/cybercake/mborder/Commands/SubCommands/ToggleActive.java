@@ -44,6 +44,7 @@ public class ToggleActive extends SubCommand {
                     entity.setCustomName(Utils.chat(Main.getMainConfig().getString("worldBorderAnimalName")));
                     entity.setCustomNameVisible(true);
                     entity.setInvulnerable(true);
+                    entity.setPersistent(true);
                     if(entity.getType().equals(EntityType.PIG)) {
                         Pig pig = (Pig) entity;
                         pig.setSaddle(true);
