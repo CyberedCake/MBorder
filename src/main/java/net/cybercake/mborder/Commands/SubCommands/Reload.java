@@ -13,7 +13,7 @@ import java.util.List;
 public class Reload extends SubCommand {
 
     public Reload() {
-        super("reload", "mborder.reload", "Reloads the configuration file.", "/mborder reload", new String[]{"rl"});
+        super("reload", "mborder.command.reload", "Reloads the configuration file.", "/mborder reload", new String[]{"rl"});
     }
 
     @Override

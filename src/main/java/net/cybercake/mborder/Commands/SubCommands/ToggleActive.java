@@ -7,10 +7,10 @@ import org.bukkit.command.CommandSender;
 
 import java.util.List;
 
-public class Start extends SubCommand {
+public class ToggleActive extends SubCommand {
 
-    public Start() {
-        super("toggleactive", "wborder.toggleactive", "Start or stop the game.", "/mborder toggleactive", new String[]{"start", "stop"});
+    public ToggleActive() {
+        super("toggleactive", "mborder.command.toggleactive", "Start or stop the game.", "/mborder toggleactive", new String[]{"start", "stop"});
     }
 
     @Override

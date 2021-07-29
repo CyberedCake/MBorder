@@ -11,13 +11,17 @@ permissions:
     description: Allowing a player this permission will give them all permissions for the MBorder plugin
     default: op
     children:
-      - mborder.reload
-      - mborder.distancebetween
-  mborder.reload:
+      - mborder.command.reload
+      - mborder.command.distancebetween
+      - mborder.command.toggleactive
+  mborder.command.reload:
     description: Allowing a player this permission will give them the ability to use /mborder reload
     default: op
-  mborder.distancebetween:
+  mborder.command.distancebetween:
     description: Allowing a player this permission will give them the ability to use /mborder distancebetween
+    default: op
+  mborder.command.toggleactive:
+    description: Allowing a player this permission will give them the ability to use /mborder toggleactive
     default: op
 
 commands:
