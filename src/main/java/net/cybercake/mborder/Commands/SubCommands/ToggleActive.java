@@ -54,7 +54,7 @@ public class ToggleActive extends SubCommand {
                         horse.getInventory().setSaddle(new ItemStack(Material.SADDLE));
                     }
                     if(Main.getMainConfig().getBoolean("worldBorderAnimalSilent")) { entity.setSilent(true); }
-                    if(Main.getMainConfig().getBoolean("worldBorderAnimalSilent")) { entity.setGlowing(true); }
+                    if(Main.getMainConfig().getBoolean("worldBorderAnimalGlowing")) { entity.setGlowing(true); }
                     DataUtils.setCustomYml("data", "server.mobUUID", entity.getUniqueId().toString());
                     p.sendMessage(Utils.chat("&a&lGAME ENABLED!"));
                     p.sendMessage(Utils.chat("&7&oThe game has started with the center being your location!"));
