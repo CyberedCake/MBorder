@@ -32,18 +32,23 @@ public class ToggleActive extends SubCommand {
             else if(!DataUtils.getCustomYmlBoolean("data", "server.active")) {
                 DataUtils.setCustomYml("data", "server.active", true);
                 DataUtils.setCustomYml("data", "server.overworld.centerLocation", p.getLocation());
+
                 Entity entityoverworld = getMainWorld().spawnEntity(p.getLocation(), EntityType.valueOf(Main.getMainConfig().getString("overworld.worldBorderAnimal")));
                 spawnEntity(MEntityType.OVERWORLD, entityoverworld);
                 DataUtils.setCustomYml("data", "server.overworld.mobUUID", entityoverworld.getUniqueId().toString());
+
                 Entity entitynether = Bukkit.getWorld(getMainWorldString() + "_nether").spawnEntity(new Location(Bukkit.getWorld(getMainWorldString() + "_nether"), p.getLocation().getX(), p.getLocation().getY(), p.getLocation().getZ(), p.getLocation().getYaw(), p.getLocation().getPitch()), EntityType.valueOf(Main.getMainConfig().getString("nether.worldBorderAnimal")));
                 spawnEntity(MEntityType.NETHER, entitynether);
                 DataUtils.setCustomYml("data", "server.nether.mobUUID", entitynether.getUniqueId().toString());
+
                 p.sendMessage(Utils.chat("&a&lGAME ENABLED!"));
                 p.sendMessage(Utils.chat("&7&oThe game has started with the center being your location!"));
             }else if(DataUtils.getCustomYmlBoolean("data", "server.active")) {
                 DataUtils.setCustomYml("data", "server.active", false);
-                Entity entity = Bukkit.getEntity(UUID.fromString(DataUtils.getCustomYmlString("data", "server.overworld.mobUUID")));
-                entity.remove();
+                Entity entityoverworld = Bukkit.getEntity(UUID.fromString(DataUtils.getCustomYmlString("data", "server.overworld.mobUUID")));
+                entityoverworld.remove();
+                Entity entitynether = Bukkit.getEntity(UUID.fromString(DataUtils.getCustomYmlString("data", "server.nether.mobUUID")));
+                entitynether.remove();
                 p.sendMessage(Utils.chat("&c&lGAME DISABLED!"));
                 p.sendMessage(Utils.chat("&7&oThe game has been ended!"));
             }
@@ -81,6 +86,7 @@ public class ToggleActive extends SubCommand {
                 }
                 if(Main.getMainConfig().getBoolean("overworld.worldBorderAnimalSilent")) { entity.setSilent(true); }
                 if(Main.getMainConfig().getBoolean("overworld.worldBorderAnimalGlowing")) { entity.setGlowing(true); }
+                break;
             case NETHER:
                 entity.getPersistentDataContainer().set(new NamespacedKey(Main.getPlugin(), "nether.worldBorderAnimal"), PersistentDataType.INTEGER, 1);
                 entity.setCustomName(Utils.chat(Main.getMainConfig().getString("nether.worldBorderAnimalName")));
@@ -101,6 +107,7 @@ public class ToggleActive extends SubCommand {
                 }
                 if(Main.getMainConfig().getBoolean("nether.worldBorderAnimalSilent")) { entity.setSilent(true); }
                 if(Main.getMainConfig().getBoolean("nether.worldBorderAnimalGlowing")) { entity.setGlowing(true); }
+                break;
         }
     }
 
