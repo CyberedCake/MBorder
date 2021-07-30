@@ -9,11 +9,10 @@ website: https://github.com/CyberedCake/MBorder
 permissions:
   mborder.*:
     description: Allowing a player this permission will give them all permissions for the MBorder plugin
-    default: op
     children:
-      - mborder.command.reload
-      - mborder.command.distancebetween
-      - mborder.command.toggleactive
+      - mborder.command.reload: true
+      - mborder.command.distancebetween: true
+      - mborder.command.toggleactive: true
   mborder.command.reload:
     description: Allowing a player this permission will give them the ability to use /mborder reload
     default: op
