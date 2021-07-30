@@ -3,6 +3,7 @@ package net.cybercake.mborder.Utils;
 import net.cybercake.mborder.Main;
 import org.bukkit.Bukkit;
 import org.bukkit.Color;
+import org.bukkit.Location;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -531,6 +532,30 @@ public class DataUtils {
             FileConfiguration customConfig = YamlConfiguration.loadConfiguration(customYml);
 
             return customConfig.getVector(path);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static Location getCustomYmlLocation(String ymlFileName, String path) {
+        try {
+            File customYml = new File(Main.getPlugin().getDataFolder() + "/" + ymlFileName + ".yml");
+            FileConfiguration customConfig = YamlConfiguration.loadConfiguration(customYml);
+
+            return customConfig.getLocation(path);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static Location getCustomYmlLocation(String ymlDirectory, String ymlFileName, String path) {
+        try {
+            File customYml = new File(ymlDirectory + ymlFileName + ".yml");
+            FileConfiguration customConfig = YamlConfiguration.loadConfiguration(customYml);
+
+            return customConfig.getLocation(path);
         } catch (Exception e) {
             e.printStackTrace();
             return null;
