@@ -23,6 +23,12 @@ overworld:
   worldBorderColor: BLUE
   # The color of the WorldBorder, possible colors are 'RED', 'BLUE', and 'GREEN'
 
+  worldBorderDamage: 0.0
+  # How much damage the WorldBorder does per block outside the border
+
+  worldBorderTeleport: 50.0
+  # How many blocks outside the WorldBorder you must be to get teleported back to safety
+
   worldBorderAnimal: PIG
   # The mob that will be in the middle of the WorldBorder
 
@@ -41,6 +47,12 @@ nether:
 
   worldBorderColor: RED
   # The color of the WorldBorder, possible colors are 'RED', 'BLUE', and 'GREEN'
+
+  worldBorderDamage: 0.0
+  # How much damage the WorldBorder does per block outside the border
+
+  worldBorderTeleport: 50.0
+  # How many blocks outside the WorldBorder you must be to get teleported back to safety
 
   worldBorderAnimal: STRIDER
   # The mob that will be in the middle of the WorldBorder
