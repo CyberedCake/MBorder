@@ -2,6 +2,7 @@ package net.cybercake.mborder;
 
 import net.cybercake.mborder.Commands.CommandListeners;
 import net.cybercake.mborder.Commands.CommandManager;
+import net.cybercake.mborder.RepeatingTasks.TrackEntity;
 import net.cybercake.mborder.Utils.DataUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandExecutor;
@@ -39,6 +40,8 @@ public final class Main extends JavaPlugin {
         registerTabCompleter("mborder", new CommandManager());
 
         registerListener(new CommandListeners());
+
+        registerRunnable(new TrackEntity(), Main.getMainConfig().getLong("updateWorldBorderInterval"));
 
         System.out.println("Enabled MBorder [v" + getPlugin(Main.class).getDescription().getVersion() + "]");
 
