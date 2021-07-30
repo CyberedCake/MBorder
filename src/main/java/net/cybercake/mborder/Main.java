@@ -2,11 +2,14 @@ package net.cybercake.mborder;
 
 import net.cybercake.mborder.Commands.CommandListeners;
 import net.cybercake.mborder.Commands.CommandManager;
+import net.cybercake.mborder.Commands.SubCommands.ToggleActive;
 import net.cybercake.mborder.Listeners.EntityDeath;
 import net.cybercake.mborder.RepeatingTasks.AttemptRespawn;
 import net.cybercake.mborder.RepeatingTasks.TrackEntity;
 import net.cybercake.mborder.Utils.DataUtils;
+import net.cybercake.mborder.Utils.Utils;
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -29,16 +32,39 @@ public final class Main extends JavaPlugin {
 
         saveResource("data.yml", false);
 
+        String serverVersion = getServer().getClass().getPackage().getName();
+        String version = serverVersion.substring(serverVersion.lastIndexOf('.') + 1);
+
+        if(!version.equals("v1_17_R1")) {
+            getServer().getPluginManager().disablePlugin(this);
+            getLogger().severe(" ");
+            getLogger().severe("--- PLUGIN DISABLED ----");
+            getLogger().severe(" ");
+            getLogger().severe(Utils.chat("The plugin MBorder only works on servers with versions &a1.17.1&c!"));
+            getLogger().severe(" ");
+            getLogger().severe("Hopefully later, we will support all 1.16 versions. But for now, that is not the case");
+            getLogger().severe(" ");
+            getLogger().severe("--- PLUGIN DISABLED ----");
+            getLogger().severe(" ");
+        }
+
         if(!getConfig().getBoolean("enabled")) {
             disablePlugin();
             return;
         }
         if(!getConfig().getBoolean("persistent")) {
             TrackEntity.disableGame();
+
             if(DataUtils.getCustomYmlString("data", "server.overworld.mobUUID") == null) {
                 Entity entity = Bukkit.getEntity(UUID.fromString(DataUtils.getCustomYmlString("data", "server.overworld.mobUUID")));
                 entity.remove();
             }
+
+            DataUtils.setCustomYml("data", "server.overworld.centerLocation", new Location(ToggleActive.getMainWorld(), 0, 0, 0, 0, 0));
+            DataUtils.setCustomYml("data", "server.overworld.mobUUID", 0-0-0-0-0);
+
+            DataUtils.setCustomYml("data", "server.nether.centerLocation", new Location(Bukkit.getWorld(ToggleActive.getMainWorldString() + "_nether"), 0, 0, 0, 0, 0));
+            DataUtils.setCustomYml("data", "server.nether.mobUUID", 0-0-0-0-0);
         }
 
         saveDefaultConfig();
