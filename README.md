@@ -5,6 +5,9 @@ A recreation of the Minehut server "Wife"'s moving border mechanics
 ## Installation
 All downloads for the plugin can be found on the [releases page](https://github.com/CyberedCake/MBorder/releases)
 
+## Found an issue?
+**Please** report all issues you find to the [issues page](https://github.com/CyberedCake/MBorder/issues)
+
 ## Commands
 `/mborder help` - Prints a help message with all commands and descriptions, hover over a command for information 
 about that command.
