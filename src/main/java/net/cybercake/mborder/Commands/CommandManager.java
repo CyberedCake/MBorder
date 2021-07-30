@@ -1,6 +1,6 @@
 package net.cybercake.mborder.Commands;
 
-import net.cybercake.mborder.Commands.SubCommands.DistanceBetween;
+import net.cybercake.mborder.Commands.SubCommands.CoordsCheck;
 import net.cybercake.mborder.Commands.SubCommands.Help;
 import net.cybercake.mborder.Commands.SubCommands.Reload;
 import net.cybercake.mborder.Commands.SubCommands.ToggleActive;
@@ -33,7 +33,7 @@ public class CommandManager implements CommandExecutor, TabCompleter {
     public CommandManager() {
         subcommands.add(new Help());
         subcommands.add(new Reload());
-        subcommands.add(new DistanceBetween());
+        subcommands.add(new CoordsCheck());
         subcommands.add(new ToggleActive());
     }
 

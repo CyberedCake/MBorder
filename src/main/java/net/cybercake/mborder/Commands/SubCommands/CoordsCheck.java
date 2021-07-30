@@ -2,21 +2,20 @@ package net.cybercake.mborder.Commands.SubCommands;
 
 import net.cybercake.mborder.Commands.CommandManager;
 import net.cybercake.mborder.Commands.SubCommand;
+import net.cybercake.mborder.Utils.DataUtils;
 import net.cybercake.mborder.Utils.Utils;
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import java.text.NumberFormat;
 import java.util.Arrays;
 import java.util.List;
 
-public class DistanceBetween extends SubCommand {
+public class CoordsCheck extends SubCommand {
 
-    public DistanceBetween() {
-        super("distancebetween", "mborder.command.distancebetween", "Gets the distance between you and a certain location.", "/mborder distancebetween <x> <y> <z>", new String[]{"calc"});
+    public CoordsCheck() {
+        super("coordscheck", "mborder.command.coordscheck", "Gets the distance between you and a certain location.", "/mborder coordscheck [<x> <y> <z>]", new String[]{"calc", "distancebetween"});
     }
 
     @Override
@@ -24,8 +23,15 @@ public class DistanceBetween extends SubCommand {
         if(sender instanceof Player) {
             Player p = (Player) sender;
 
-            if(args.length < 4) { p.sendMessage(Utils.chat("&cInvalid usage! &7/mborder distancebetween <x> <y> <z>")); }
-            else if((!isInt(args[1])) || (!isInt(args[2])) || (!isInt(args[3]))) { p.sendMessage(Utils.chat("&cInvalid integer! &7/mborder distancebetween <x> <y> <z>")); }
+            if(args.length == 1) {
+                if(DataUtils.getCustomYmlBoolean("data", "server.active")) {
+                    p.sendMessage(Utils.chat("&fYou are &e" + Utils.formatLong(Math.round(p.getLocation().distance(DataUtils.getCustomYmlLocation("data", "server.centerLocation")))) + " &fblocks away from &athe center"));
+                }else{
+                    p.sendMessage(Utils.chat("&cInvalid usage! &7/mborder coordscheck [<x> <y> <z>]"));
+                }
+            }
+            else if(args.length < 4) { p.sendMessage(Utils.chat("&cInvalid usage! &7/mborder coordscheck [<x> <y> <z>]")); }
+            else if((!isInt(args[1])) || (!isInt(args[2])) || (!isInt(args[3]))) { p.sendMessage(Utils.chat("&cInvalid integer! &7/mborder coordscheck [<x> <y> <z>]")); }
             else {
                 Location playerLocation = p.getLocation();
                 Location specificLocation = new Location(p.getWorld(), Integer.parseInt(args[1]), Integer.parseInt(args[2]), Integer.parseInt(args[3]));

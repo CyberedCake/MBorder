@@ -14,7 +14,6 @@ import org.bukkit.persistence.PersistentDataType;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.IOException;
 import java.util.List;
 import java.util.Properties;
 import java.util.UUID;
@@ -29,48 +28,52 @@ public class ToggleActive extends SubCommand {
     public void perform(CommandSender sender, String[] args, Command command) {
         if(sender instanceof Player) {
             Player p = (Player) sender;
-            Properties pr = new Properties();
-            File f = new File("server.properties");
-            try {
-                FileInputStream in = new FileInputStream(f);
-                pr.load(in);
-                String mainWorld = pr.getProperty("level-name");
-                if(p.getWorld() != Bukkit.getWorld(mainWorld)) { p.sendMessage(Utils.chat("&cYou must be in the main Minecraft world specified in the server.properties to start the game!")); }
-                else if(!DataUtils.getCustomYmlBoolean("data", "server.active")) {
-                    DataUtils.setCustomYml("data", "server.active", true);
-                    DataUtils.setCustomYml("data", "server.centerLocation", p.getLocation());
-                    Entity entity = p.getWorld().spawnEntity(p.getLocation(), EntityType.valueOf(Main.getMainConfig().getString("worldBorderAnimal")));
-                    entity.getPersistentDataContainer().set(new NamespacedKey(Main.getPlugin(), "worldBorderAnimal"), PersistentDataType.INTEGER, 1);
-                    entity.setCustomName(Utils.chat(Main.getMainConfig().getString("worldBorderAnimalName")));
-                    entity.setCustomNameVisible(true);
-                    entity.setInvulnerable(true);
-                    entity.setPersistent(true);
-                    if(entity.getType().equals(EntityType.PIG)) {
-                        Pig pig = (Pig) entity;
-                        pig.setSaddle(true);
-                    }else if(entity.getType().equals(EntityType.HORSE)) {
-                        AbstractHorse horse = (AbstractHorse) entity;
-                        horse.setTamed(true);
-                        horse.getInventory().setSaddle(new ItemStack(Material.SADDLE));
-                    }
-                    if(Main.getMainConfig().getBoolean("worldBorderAnimalSilent")) { entity.setSilent(true); }
-                    if(Main.getMainConfig().getBoolean("worldBorderAnimalGlowing")) { entity.setGlowing(true); }
-                    DataUtils.setCustomYml("data", "server.mobUUID", entity.getUniqueId().toString());
-                    p.sendMessage(Utils.chat("&a&lGAME ENABLED!"));
-                    p.sendMessage(Utils.chat("&7&oThe game has started with the center being your location!"));
-                }else if(DataUtils.getCustomYmlBoolean("data", "server.active")) {
-                    DataUtils.setCustomYml("data", "server.active", false);
-                    Entity entity = Bukkit.getEntity(UUID.fromString(DataUtils.getCustomYmlString("data", "server.mobUUID")));
-                    entity.remove();
-                    p.sendMessage(Utils.chat("&c&lGAME DISABLED!"));
-                    p.sendMessage(Utils.chat("&7&oThe game has been ended!"));
+            if(p.getWorld() != getMainWorld()) { p.sendMessage(Utils.chat("&cYou must be in the main Minecraft world specified in the server.properties to start the game!")); }
+            else if(!DataUtils.getCustomYmlBoolean("data", "server.active")) {
+                DataUtils.setCustomYml("data", "server.active", true);
+                DataUtils.setCustomYml("data", "server.overworld.centerLocation", p.getLocation());
+                Entity entity = p.getWorld().spawnEntity(p.getLocation(), EntityType.valueOf(Main.getMainConfig().getString("overworld.worldBorderAnimal")));
+                entity.getPersistentDataContainer().set(new NamespacedKey(Main.getPlugin(), "overworld.worldBorderAnimal"), PersistentDataType.INTEGER, 1);
+                entity.setCustomName(Utils.chat(Main.getMainConfig().getString("overworld.worldBorderAnimalName")));
+                entity.setCustomNameVisible(true);
+                entity.setInvulnerable(true);
+                entity.setPersistent(true);
+                if(entity.getType().equals(EntityType.PIG)) {
+                    Pig pig = (Pig) entity;
+                    pig.setSaddle(true);
+                }else if(entity.getType().equals(EntityType.HORSE)) {
+                    AbstractHorse horse = (AbstractHorse) entity;
+                    horse.setTamed(true);
+                    horse.getInventory().setSaddle(new ItemStack(Material.SADDLE));
                 }
-            } catch (IOException e) { }
+                if(Main.getMainConfig().getBoolean("overworld.worldBorderAnimalSilent")) { entity.setSilent(true); }
+                if(Main.getMainConfig().getBoolean("overworld.worldBorderAnimalGlowing")) { entity.setGlowing(true); }
+                DataUtils.setCustomYml("data", "server.overworld.mobUUID", entity.getUniqueId().toString());
+                p.sendMessage(Utils.chat("&a&lGAME ENABLED!"));
+                p.sendMessage(Utils.chat("&7&oThe game has started with the center being your location!"));
+            }else if(DataUtils.getCustomYmlBoolean("data", "server.active")) {
+                DataUtils.setCustomYml("data", "server.active", false);
+                Entity entity = Bukkit.getEntity(UUID.fromString(DataUtils.getCustomYmlString("data", "server.overworld.mobUUID")));
+                entity.remove();
+                p.sendMessage(Utils.chat("&c&lGAME DISABLED!"));
+                p.sendMessage(Utils.chat("&7&oThe game has been ended!"));
+            }
         } else { System.out.println("Only players can execute this sub-command!"); }
     }
 
     @Override
     public List<String> tab(CommandSender sender, String[] args) {
         return CommandManager.emptyList;
+    }
+
+    public static World getMainWorld() {
+        Properties pr = new Properties();
+        File f = new File("server.properties");
+        try {
+            FileInputStream in = new FileInputStream(f);
+            pr.load(in);
+            return Bukkit.getWorld(pr.getProperty("level-name"));
+        } catch (Exception e) { e.printStackTrace(); }
+        return null;
     }
 }

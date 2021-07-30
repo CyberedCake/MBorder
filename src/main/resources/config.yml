@@ -12,25 +12,47 @@
 
 enabled: true
 # Set this value to 'false' if you want the plugin to disable itself upon starting up
-# NOTE: This requires a restart to take effect
+# NOTE #1: This just disables the plugin and will not reset the WorldBorder, kill the pig
+#          or do anything along those lines. This isn't really meant to be used to be honest.
+# NOTE #2: This requires a restart to take effect
 
-worldBorderSize: 100.0
-# The size the WorldBorder will constantly be at
+overworld:
+  worldBorderSize: 100.0
+  # The size the WorldBorder will constantly be at
 
-worldBorderColor: BLUE
-# The color of the WorldBorder, possible colors are 'RED', 'BLUE', and 'GREEN'
+  worldBorderColor: BLUE
+  # The color of the WorldBorder, possible colors are 'RED', 'BLUE', and 'GREEN'
 
-worldBorderAnimal: PIG
-# The mob that will be in the middle of the WorldBorder
+  worldBorderAnimal: PIG
+  # The mob that will be in the middle of the WorldBorder
 
-worldBorderAnimalName: '&b&lWorldBorder Center'
-# The name of the mob at the center, set to 'empty' to remain none
+  worldBorderAnimalName: '&aOverworld &b&lWorldBorder'
+  # The name of the mob at the center, set to 'empty' to remain none
 
-worldBorderAnimalGlowing: true
-# Determines if the WorldBorder animal will glow or not
+  worldBorderAnimalGlowing: true
+  # Determines if the WorldBorder animal will glow or not
 
-worldBorderAnimalSilent: true
-# Determines if the WorldBorder animal is silent or not
+  worldBorderAnimalSilent: true
+  # Determines if the WorldBorder animal is silent or not
+
+nether:
+  worldBorderSize: 100.0
+  # The size the WorldBorder will constantly be at
+
+  worldBorderColor: RED
+  # The color of the WorldBorder, possible colors are 'RED', 'BLUE', and 'GREEN'
+
+  worldBorderAnimal: STRIDER
+  # The mob that will be in the middle of the WorldBorder
+
+  worldBorderAnimalName: '&cNether &b&lWorldBorder'
+  # The name of the mob at the center, set to 'empty' to remain none
+
+  worldBorderAnimalGlowing: true
+  # Determines if the WorldBorder animal will glow or not
+
+  worldBorderAnimalSilent: true
+  # Determines if the WorldBorder animal is silent or not
 
 updateWorldBorderInterval: 5
 # How long the WorldBorder gets the location of the animal and sets worldborder
