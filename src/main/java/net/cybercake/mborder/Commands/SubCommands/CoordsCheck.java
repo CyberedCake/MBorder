@@ -4,6 +4,10 @@ import net.cybercake.mborder.Commands.CommandManager;
 import net.cybercake.mborder.Commands.SubCommand;
 import net.cybercake.mborder.Utils.DataUtils;
 import net.cybercake.mborder.Utils.Utils;
+import net.md_5.bungee.api.chat.ComponentBuilder;
+import net.md_5.bungee.api.chat.HoverEvent;
+import net.md_5.bungee.api.chat.TextComponent;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -25,7 +29,20 @@ public class CoordsCheck extends SubCommand {
 
             if(args.length == 1) {
                 if(DataUtils.getCustomYmlBoolean("data", "server.active")) {
-                    p.sendMessage(Utils.chat("&fYou are &e" + Utils.formatLong(Math.round(p.getLocation().distance(DataUtils.getCustomYmlLocation("data", "server.centerLocation")))) + " &fblocks away from &athe center"));
+                    String type = "";
+                    if(p.getWorld().equals(ToggleActive.getMainWorld())) {
+                        type = "overworld";
+                    }else if(p.getWorld().equals(Bukkit.getWorld(ToggleActive.getMainWorldString() + "_nether"))){
+                        type = "nether";
+                    }else{
+                        p.sendMessage(Utils.chat("&cInvalid usage! &7/mborder coordscheck [<x> <y> <z>]"));
+                        return;
+                    }
+                    TextComponent mainBlocksText = new TextComponent(Utils.chat("&fYou are &e" + Utils.formatLong(Math.round(p.getLocation().distance(DataUtils.getCustomYmlLocation("data", "server." + type + ".centerLocation")))) + " &fblocks away from "));
+                    TextComponent theCenter = new TextComponent(Utils.chat("&a&nthe center"));
+                    theCenter.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(Utils.chat("&6World Center:\n&fx" + Math.round(DataUtils.getCustomYmlLocation("data", "server." + type + ".centerLocation").getX()) + " y" + Math.round(DataUtils.getCustomYmlLocation("data", "server." + type + ".centerLocation").getY()) + " z" + Math.round(DataUtils.getCustomYmlLocation("data", "server." + type + ".centerLocation").getZ()))).create()));
+                    mainBlocksText.addExtra(theCenter);
+                    p.spigot().sendMessage(mainBlocksText);
                 }else{
                     p.sendMessage(Utils.chat("&cInvalid usage! &7/mborder coordscheck [<x> <y> <z>]"));
                 }

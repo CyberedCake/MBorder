@@ -2,14 +2,19 @@ package net.cybercake.mborder;
 
 import net.cybercake.mborder.Commands.CommandListeners;
 import net.cybercake.mborder.Commands.CommandManager;
+import net.cybercake.mborder.Listeners.EntityDeath;
+import net.cybercake.mborder.RepeatingTasks.AttemptRespawn;
 import net.cybercake.mborder.RepeatingTasks.TrackEntity;
 import net.cybercake.mborder.Utils.DataUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.entity.Entity;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import java.util.UUID;
 
 public final class Main extends JavaPlugin {
 
@@ -29,7 +34,11 @@ public final class Main extends JavaPlugin {
             return;
         }
         if(!getConfig().getBoolean("persistent")) {
-            DataUtils.setCustomYml("data", "server.active", false);
+            TrackEntity.disableGame();
+            if(DataUtils.getCustomYmlString("data", "server.overworld.mobUUID") == null) {
+                Entity entity = Bukkit.getEntity(UUID.fromString(DataUtils.getCustomYmlString("data", "server.overworld.mobUUID")));
+                entity.remove();
+            }
         }
 
         saveDefaultConfig();
@@ -40,8 +49,10 @@ public final class Main extends JavaPlugin {
         registerTabCompleter("mborder", new CommandManager());
 
         registerListener(new CommandListeners());
+        registerListener(new EntityDeath());
 
         registerRunnable(new TrackEntity(), Main.getMainConfig().getLong("updateWorldBorderInterval"));
+        registerRunnable(new AttemptRespawn(), 40);
 
         System.out.println("Enabled MBorder [v" + getPlugin(Main.class).getDescription().getVersion() + "]");
 
