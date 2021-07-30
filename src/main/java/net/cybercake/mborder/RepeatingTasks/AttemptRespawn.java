@@ -10,29 +10,33 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 
+import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 import java.util.UUID;
 
 public class AttemptRespawn implements Runnable {
 
-    public static Map<String, Boolean> attemptingRespawn;
-    public static Map<String, Integer> attempts;
-    public static Map<String, Integer> attemptsMax;
-
-    public AttemptRespawn() {
-        attemptingRespawn.put("overworld", false);
-        attemptingRespawn.put("nether", false);
-
-        attempts.put("overworld", 0);
-        attempts.put("nether", 0);
-
-        attemptsMax.put("overworld", 5);
-        attemptsMax.put("nether", 5);
-    }
+    public static HashMap<String, Boolean> attemptingRespawn = new HashMap<>();
+    public static HashMap<String, Integer> attempts = new HashMap<>();
+    public static HashMap<String, Integer> attemptsMax = new HashMap<>();
 
     @Override
     public void run() {
+
+        if(attemptingRespawn.get("overworld") == null || attemptingRespawn.get("nether") == null) {
+            attemptingRespawn.put("overworld", false);
+            attemptingRespawn.put("nether", false);
+        }
+        if(attempts.get("overworld") == null || attempts.get("nether") == null) {
+            attempts.put("overworld", 0);
+            attempts.put("nether", 0);
+        }
+        if(attemptsMax.get("overworld") == null || attemptsMax.get("nether") == null) {
+            attemptsMax.put("overworld", 5);
+            attemptsMax.put("nether", 5);
+        }
+
         if(DataUtils.getCustomYmlBoolean("data", "server.active")) {
             respawnAttempt("overworld");
             respawnAttempt("nether");
@@ -40,7 +44,6 @@ public class AttemptRespawn implements Runnable {
     }
 
     public static void respawnAttempt(String worldType) {
-
         Entity entity = Bukkit.getEntity(UUID.fromString(DataUtils.getCustomYmlString("data", "server." + worldType + ".mobUUID")));
         if(entity == null) {
             if(!attemptingRespawn.get(worldType)) {

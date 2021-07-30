@@ -67,6 +67,7 @@ public class TrackEntity implements Runnable {
         border.setCenter(0, 0);
         border.setSize(59999968);
         border.setWarningDistance(0);
+
         DataUtils.setCustomYml("data", "server.active", false);
     }
 }
