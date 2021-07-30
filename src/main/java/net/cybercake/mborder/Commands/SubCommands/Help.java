@@ -10,9 +10,7 @@ import java.util.List;
 
 public class Help extends SubCommand {
 
-    public Help() {
-        super("help", "", "Prints this help message.", "/mborder help", "");
-    }
+    public Help() { super("help", "", "Prints this help message.", "/mborder help", new String[]{"?", "info"}); }
 
     @Override
     public void perform(CommandSender sender, String[] args, Command command) {
