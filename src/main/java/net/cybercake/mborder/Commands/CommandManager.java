@@ -1,9 +1,6 @@
 package net.cybercake.mborder.Commands;
 
-import net.cybercake.mborder.Commands.SubCommands.CoordsCheck;
-import net.cybercake.mborder.Commands.SubCommands.Help;
-import net.cybercake.mborder.Commands.SubCommands.Reload;
-import net.cybercake.mborder.Commands.SubCommands.ToggleActive;
+import net.cybercake.mborder.Commands.SubCommands.*;
 import net.cybercake.mborder.Utils.Utils;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.chat.*;
@@ -35,6 +32,7 @@ public class CommandManager implements CommandExecutor, TabCompleter {
         subcommands.add(new Reload());
         subcommands.add(new CoordsCheck());
         subcommands.add(new ToggleActive());
+        subcommands.add(new TPMob());
     }
 
     @Override

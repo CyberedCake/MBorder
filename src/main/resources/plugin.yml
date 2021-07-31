@@ -13,6 +13,7 @@ permissions:
       - mborder.command.reload: true
       - mborder.command.coordscheck: true
       - mborder.command.toggleactive: true
+      - mborder.command.tpmob: true
   mborder.command.reload:
     description: Allowing a player this permission will give them the ability to use /mborder reload
     default: op
@@ -21,6 +22,9 @@ permissions:
     default: op
   mborder.command.toggleactive:
     description: Allowing a player this permission will give them the ability to use /mborder toggleactive
+    default: op
+  mborder.command.tpmob:
+    description: Allowing a player this permission will give them the ability to use /mborder tpmob
     default: op
 
 commands:

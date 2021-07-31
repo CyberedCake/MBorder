@@ -58,8 +58,10 @@ public final class Main extends JavaPlugin {
         if(!getConfig().getBoolean("persistent")) {
             TrackEntity.disableGame();
 
-            try { Entity entity = Bukkit.getEntity(UUID.fromString(DataUtils.getCustomYmlString("data", "server.overworld.mobUUID")));
-                entity.remove(); } catch (Exception e) { }
+            try {
+                Entity entity = Bukkit.getEntity(UUID.fromString(DataUtils.getCustomYmlString("data", "server.overworld.mobUUID")));
+                entity.remove();
+            } catch (Exception e) { }
 
             DataUtils.setCustomYml("data", "server.overworld.centerLocation", new Location(ToggleActive.getMainWorld(), 0, 0, 0, 0, 0));
             DataUtils.setCustomYml("data", "server.overworld.mobUUID", 0);
