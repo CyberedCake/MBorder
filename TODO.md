@@ -9,3 +9,4 @@
 - ~~Reset the pig every 300 seconds [5 minutes] ... make configurable~~ (This is now just checking if the entitiy has been killed)
 - If you go far outside the border, teleport back to spawn ... make configurable
 - Starter tools, basic stone tools + apples ... make configurable
+- Fix nether mob always falling into void upon spawning
