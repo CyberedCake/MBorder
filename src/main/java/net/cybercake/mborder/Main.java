@@ -30,10 +30,6 @@ public final class Main extends JavaPlugin {
     public void onEnable() {
         plugin = this;
 
-        if(!DataUtils.getCustomYmlFile("data").exists()) {
-            saveResource("data.yml", false);
-        }
-
         String serverVersion = getServer().getClass().getPackage().getName();
         String version = serverVersion.substring(serverVersion.lastIndexOf('.') + 1);
 
@@ -54,14 +50,16 @@ public final class Main extends JavaPlugin {
             disablePlugin();
             return;
         }
+
+        if(!DataUtils.getCustomYmlFile("data").exists()) {
+            saveResource("data.yml", false);
+        }
+
         if(!getConfig().getBoolean("persistent")) {
             TrackEntity.disableGame();
 
-            if(DataUtils.getCustomYmlString("data", "server.overworld.mobUUID") != null) {
-                Entity entity = Bukkit.getEntity(UUID.fromString(DataUtils.getCustomYmlString("data", "server.overworld.mobUUID")));
-                assert entity != null;
-                entity.remove();
-            }
+            try { Entity entity = Bukkit.getEntity(UUID.fromString(DataUtils.getCustomYmlString("data", "server.overworld.mobUUID")));
+                entity.remove(); } catch (IllegalArgumentException e) { }
 
             DataUtils.setCustomYml("data", "server.overworld.centerLocation", new Location(ToggleActive.getMainWorld(), 0, 0, 0, 0, 0));
             DataUtils.setCustomYml("data", "server.overworld.mobUUID", 0);
