@@ -11,10 +11,12 @@ public class EntityDeath implements Listener {
 
     @EventHandler
     public void onDeath(EntityDeathEvent e) {
-        if(e.getEntity().getUniqueId().equals(UUID.fromString(DataUtils.getCustomYmlString("data", "server.overworld.mobUUID")))) {
-            e.getDrops().clear();
-        }else if(e.getEntity().getUniqueId().equals(UUID.fromString(DataUtils.getCustomYmlString("data", "server.nether.mobUUID")))) {
-            e.getDrops().clear();
+        if(DataUtils.getCustomYmlBoolean("data", "server.active")) {
+            if(e.getEntity().getUniqueId().equals(UUID.fromString(DataUtils.getCustomYmlString("data", "server.overworld.mobUUID")))) {
+                e.getDrops().clear();
+            }else if(e.getEntity().getUniqueId().equals(UUID.fromString(DataUtils.getCustomYmlString("data", "server.nether.mobUUID")))) {
+                e.getDrops().clear();
+            }
         }
     }
 
