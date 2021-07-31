@@ -1,6 +1,6 @@
 # MBorder
 
-A recreation of the Minehut server "Wife"'s moving border mechanics
+A recreation of the Minehut server "Wife"'s moving border mechanics for 1.17 to 1.17.1
 
 ## Installation
 All downloads for the plugin can be found on the [releases page](https://github.com/CyberedCake/MBorder/releases)
