@@ -7,5 +7,7 @@
 
 ## Plugin Package
 [x] Reset the pig every 300 seconds [5 minutes] ... make configurable
+
 [ ] If you go far outside the border, teleport back to spawn ... make configurable
+
 [ ] Starter tools, basic stone tools + apples ... make configurable
