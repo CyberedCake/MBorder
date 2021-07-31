@@ -11,6 +11,8 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.*;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataType;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -70,8 +72,9 @@ public class ToggleActive extends SubCommand {
                 entity.getPersistentDataContainer().set(new NamespacedKey(Main.getPlugin(), "overworld.worldBorderAnimal"), PersistentDataType.INTEGER, 1);
                 entity.setCustomName(Utils.chat(Main.getMainConfig().getString("overworld.worldBorderAnimalName")));
                 entity.setCustomNameVisible(true);
-                entity.setInvulnerable(true);
                 entity.setPersistent(true);
+                LivingEntity livingEntityOverworld = (LivingEntity) entity;
+                livingEntityOverworld.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 999999, 15, false, false));
 
                 if(entity instanceof Pig) {
                     Pig pig = (Pig) entity;
@@ -91,8 +94,9 @@ public class ToggleActive extends SubCommand {
                 entity.getPersistentDataContainer().set(new NamespacedKey(Main.getPlugin(), "nether.worldBorderAnimal"), PersistentDataType.INTEGER, 1);
                 entity.setCustomName(Utils.chat(Main.getMainConfig().getString("nether.worldBorderAnimalName")));
                 entity.setCustomNameVisible(true);
-                entity.setInvulnerable(true);
                 entity.setPersistent(true);
+                LivingEntity livingEntityNether = (LivingEntity) entity;
+                livingEntityNether.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 999999, 15, false, false));
 
                 if(entity instanceof Pig) {
                     Pig pig = (Pig) entity;
