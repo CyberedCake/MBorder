@@ -30,13 +30,14 @@ public final class Main extends JavaPlugin {
     public void onEnable() {
         plugin = this;
 
-        saveResource("data.yml", false);
+        if(!DataUtils.getCustomYmlFile("data").exists()) {
+            saveResource("data.yml", false);
+        }
 
         String serverVersion = getServer().getClass().getPackage().getName();
         String version = serverVersion.substring(serverVersion.lastIndexOf('.') + 1);
 
         if(!version.equals("v1_17_R1")) {
-            getServer().getPluginManager().disablePlugin(this);
             getLogger().severe(" ");
             getLogger().severe("--- PLUGIN DISABLED ----");
             getLogger().severe(" ");
@@ -46,6 +47,7 @@ public final class Main extends JavaPlugin {
             getLogger().severe(" ");
             getLogger().severe("--- PLUGIN DISABLED ----");
             getLogger().severe(" ");
+            getServer().getPluginManager().disablePlugin(this);
         }
 
         if(!getConfig().getBoolean("enabled")) {
