@@ -66,11 +66,11 @@ nether:
   worldBorderAnimalSilent: true
   # Determines if the WorldBorder animal is silent or not
 
-updateWorldBorderInterval: 5
+updateWorldBorderInterval: 1
 # How long the WorldBorder gets the location of the animal and sets worldborder
 # accordingly. This value is in ticks (20 ticks = 1 second), cannot go below 1.
 
-persistent: true
+persistent: false
 # Determines if the WorldBorder location, enabled status, etc. will be persistent
 # through restarts and server shut-downs
 
