@@ -5,6 +5,7 @@ import net.cybercake.mborder.Main;
 import net.cybercake.mborder.Utils.DataUtils;
 import net.cybercake.mborder.Utils.Utils;
 import org.bukkit.Bukkit;
+import org.bukkit.Chunk;
 import org.bukkit.Sound;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -44,6 +45,9 @@ public class AttemptRespawn implements Runnable {
     }
 
     public static void respawnAttempt(String worldType) {
+        if(!worldType.equals("overworld") && ToggleActive.getMainWorld().isChunkLoaded((int)DataUtils.getCustomYmlLocation("data", "server.overworld.centerLocation").getX(), (int)DataUtils.getCustomYmlLocation("data", "server.overworld.centerLocation").getZ())) { return; }
+        if(!worldType.equals("nether") && ToggleActive.getMainWorld().isChunkLoaded((int)DataUtils.getCustomYmlLocation("data", "server.nether.centerLocation").getX(), (int)DataUtils.getCustomYmlLocation("data", "server.nether.centerLocation").getZ())) { return; }
+
         Entity entity = Bukkit.getEntity(UUID.fromString(DataUtils.getCustomYmlString("data", "server." + worldType + ".mobUUID")));
         if(entity == null) {
             if(!attemptingRespawn.get(worldType)) {
