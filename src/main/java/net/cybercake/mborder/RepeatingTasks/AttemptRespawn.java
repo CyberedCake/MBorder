@@ -56,7 +56,7 @@ public class AttemptRespawn implements Runnable {
 
         Entity entity = Bukkit.getEntity(UUID.fromString(DataUtils.getCustomYmlString("data", "server." + worldType + ".mobUUID")));
         if(entity == null) {
-            BossBar bar = Bukkit.createBossBar(Utils.chat("&fMob no longer exist &d" + worldType + "&f! &a&oAttempting to respawn... &8(5 attempts max)"), BarColor.RED, BarStyle.SOLID);
+            BossBar bar = Bukkit.createBossBar(Utils.chat("&fMob no longer exists &d" + worldType + "&f! &a&oAttempting to respawn... &8(5 attempts max)"), BarColor.RED, BarStyle.SOLID);
             bar.setVisible(true);
             bar.setProgress(0.0);
             String type = Main.getMainConfig().getString("msgOnRespawn");
@@ -65,9 +65,9 @@ public class AttemptRespawn implements Runnable {
                     if(type.equals("CHAT")) {
                         p.sendMessage(Utils.chat("&c&lUh-oh! &fIt looks as if the " + worldType + " mob has died! Attempting to respawn &a(5 attempts max)"));
                     }else if(type.equals("TITLE")) {
-                        p.sendTitle(Utils.chat("&fMob no longer exist: &d" + worldType), Utils.chat("&f&oAttempting to respawn... &8(5 attempts max)"), 0, 100, 10);
+                        p.sendTitle(Utils.chat("&fMob no longer exists: &d" + worldType), Utils.chat("&f&oAttempting to respawn... &8(5 attempts max)"), 0, 100, 10);
                     }else if(type.equals("ACTIONBAR")) {
-                        p.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(Utils.chat("&fMob no longer exist in &d" + worldType + "&f. &f&oAttempting to respawn... &8(5 attempts max)")));
+                        p.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(Utils.chat("&fMob no longer exists in &d" + worldType + "&f. &f&oAttempting to respawn... &8(5 attempts max)")));
                     }else if(type.equals("BOSSBAR")) {
                         bar.addPlayer(p);
                     }
@@ -99,12 +99,12 @@ public class AttemptRespawn implements Runnable {
                             if(type.equals("CHAT")) {
                                 p.sendMessage(Utils.chat("&7Respawn Attempt #" + (attempts.get(worldType)+1) + ": &cFAILED"));
                             }else if(type.equals("TITLE")) {
-                                p.sendTitle(Utils.chat("&fMob no longer exist: &d" + worldType), Utils.chat("&7Respawn Attempt #" + (attempts.get(worldType)+1) + ": &cFAILED"), 0, 45, 10);
+                                p.sendTitle(Utils.chat("&fMob no longer exists: &d" + worldType), Utils.chat("&7Respawn Attempt #" + (attempts.get(worldType)+1) + ": &cFAILED"), 0, 45, 10);
                             }else if(type.equals("ACTIONBAR")) {
-                                p.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(Utils.chat("&fMob no longer exist: &d" + worldType + "&f. &7Respawn Attempt #" + (attempts.get(worldType)+1) + ": &cFAILED")));
+                                p.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(Utils.chat("&fMob no longer exists: &d" + worldType + "&f. &7Respawn Attempt #" + (attempts.get(worldType)+1) + ": &cFAILED")));
                             }else if(type.equals("BOSSBAR")) {
                                 bar.setProgress(attempts.get(worldType)/attemptsMax.get(worldType));
-                                bar.setTitle(Utils.chat("&fMob no longer exist in &d" + worldType + "&f! &7Respawn Attempt #" + (attempts.get(worldType)+1) + ": &cFAILED"));
+                                bar.setTitle(Utils.chat("&fMob no longer exists in &d" + worldType + "&f! &7Respawn Attempt #" + (attempts.get(worldType)+1) + ": &cFAILED"));
                             }
                             p.playSound(p.getLocation(), Sound.ENTITY_WITHER_BREAK_BLOCK, 0.4F, 1F);
                         }
@@ -115,14 +115,14 @@ public class AttemptRespawn implements Runnable {
                             if(type.equals("CHAT")) {
                                 p.sendMessage(Utils.chat("&7Respawn Attempt #" + (attempts.get(worldType)+1) + ": &aSUCCESS"));
                             }else if(type.equals("TITLE")) {
-                                p.sendTitle(Utils.chat("&fMob no longer exist: &d" + worldType), Utils.chat("&7Respawn Attempt #" + (attempts.get(worldType)+1) + ": &aSUCCESS"), 0, 40, 20);
+                                p.sendTitle(Utils.chat("&fMob no longer exists: &d" + worldType), Utils.chat("&7Respawn Attempt #" + (attempts.get(worldType)+1) + ": &aSUCCESS"), 0, 40, 20);
                             }else if(type.equals("ACTIONBAR")) {
-                                p.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(Utils.chat("&fMob no longer exist: &d" + worldType + "&f. &7Respawn Attempt #" + (attempts.get(worldType)+1) + ": &aSUCCESS")));
+                                p.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(Utils.chat("&fMob no longer exists: &d" + worldType + "&f. &7Respawn Attempt #" + (attempts.get(worldType)+1) + ": &aSUCCESS")));
                             }else if(type.equals("BOSSBAR")) {
                                 bar.setProgress(attempts.get(worldType)/attemptsMax.get(worldType));
                                 bar.setColor(BarColor.GREEN);
                                 bar.setProgress(1.0);
-                                bar.setTitle(Utils.chat("&fMob no longer exist in &d" + worldType + "&f! &7Respawn Attempt #" + (attempts.get(worldType)+1) + ": &aSUCCESS"));
+                                bar.setTitle(Utils.chat("&fMob no longer exists in &d" + worldType + "&f! &7Respawn Attempt #" + (attempts.get(worldType)+1) + ": &aSUCCESS"));
                             }
                             p.playSound(p.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 0.4F, 2F);
                         }
