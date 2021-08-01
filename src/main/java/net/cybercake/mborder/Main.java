@@ -59,8 +59,10 @@ public final class Main extends JavaPlugin {
             TrackEntity.disableGame();
 
             try {
-                Entity entity = Bukkit.getEntity(UUID.fromString(DataUtils.getCustomYmlString("data", "server.overworld.mobUUID")));
-                entity.remove();
+                Entity entityOverworld = Bukkit.getEntity(UUID.fromString(DataUtils.getCustomYmlString("data", "server.overworld.mobUUID")));
+                Entity entityNether = Bukkit.getEntity(UUID.fromString(DataUtils.getCustomYmlString("data", "server.nether.mobUUID")));
+                entityOverworld.remove();
+                entityNether.remove();
             } catch (Exception e) { }
 
             DataUtils.setCustomYml("data", "server.overworld.centerLocation", new Location(ToggleActive.getMainWorld(), 0, 0, 0, 0, 0));
