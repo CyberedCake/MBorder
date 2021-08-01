@@ -15,6 +15,7 @@ public class TrackEntity implements Runnable {
     public void run() {
         if(DataUtils.getCustomYmlBoolean("data", "server.active")) {
             Entity overworldentity = Bukkit.getEntity(UUID.fromString(DataUtils.getCustomYmlString("data", "server.overworld.mobUUID")));
+            ToggleActive.getMainWorld().setChunkForceLoaded((int)DataUtils.getCustomYmlLocation("data", "server.overworld.centerLocation").getX(), (int)DataUtils.getCustomYmlLocation("data", "server.overworld.centerLocation").getZ(), true);
             if (overworldentity != null){
                 WorldBorder border = ToggleActive.getMainWorld().getWorldBorder();
                 border.setCenter(overworldentity.getLocation().getX(), overworldentity.getLocation().getZ());
@@ -34,6 +35,7 @@ public class TrackEntity implements Runnable {
                 DataUtils.setCustomYml("data", "server.overworld.centerLocation", overworldentity.getLocation());
             }
             Entity netherentity = Bukkit.getEntity(UUID.fromString(DataUtils.getCustomYmlString("data", "server.nether.mobUUID")));
+            Bukkit.getWorld(ToggleActive.getMainWorldString() + "_nether").setChunkForceLoaded((int)DataUtils.getCustomYmlLocation("data", "server.nether.centerLocation").getX(), (int)DataUtils.getCustomYmlLocation("data", "server.nether.centerLocation").getZ(), true);
             if (netherentity != null){
                 WorldBorder border = Bukkit.getWorld(ToggleActive.getMainWorldString() + "_nether").getWorldBorder();
                 border.setCenter(netherentity.getLocation().getX(), netherentity.getLocation().getZ());

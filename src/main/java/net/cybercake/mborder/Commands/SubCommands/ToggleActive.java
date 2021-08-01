@@ -39,7 +39,7 @@ public class ToggleActive extends SubCommand {
                 spawnEntity(MEntityType.OVERWORLD, entityoverworld);
                 DataUtils.setCustomYml("data", "server.overworld.mobUUID", entityoverworld.getUniqueId().toString());
 
-                Entity entitynether = Bukkit.getWorld(getMainWorldString() + "_nether").spawnEntity(new Location(Bukkit.getWorld(getMainWorldString() + "_nether"), p.getLocation().getX(), p.getLocation().getY(), p.getLocation().getZ(), p.getLocation().getYaw(), p.getLocation().getPitch()), EntityType.valueOf(Main.getMainConfig().getString("nether.worldBorderAnimal")));
+                Entity entitynether = Bukkit.getWorld(getMainWorldString() + "_nether").spawnEntity(new Location(Bukkit.getWorld(getMainWorldString() + "_nether"), 0.0, 100, 0.0), EntityType.valueOf(Main.getMainConfig().getString("nether.worldBorderAnimal")));
                 spawnEntity(MEntityType.NETHER, entitynether);
                 DataUtils.setCustomYml("data", "server.nether.mobUUID", entitynether.getUniqueId().toString());
 
