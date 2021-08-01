@@ -7,10 +7,8 @@ import net.cybercake.mborder.Utils.Utils;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
-import org.bukkit.Chunk;
 import org.bukkit.Sound;
 import org.bukkit.boss.BarColor;
-import org.bukkit.boss.BarFlag;
 import org.bukkit.boss.BarStyle;
 import org.bukkit.boss.BossBar;
 import org.bukkit.entity.Entity;
@@ -19,7 +17,6 @@ import org.bukkit.entity.Player;
 
 import java.util.HashMap;
 import java.util.Locale;
-import java.util.Map;
 import java.util.UUID;
 
 public class AttemptRespawn implements Runnable {

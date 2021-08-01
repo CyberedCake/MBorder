@@ -23,3 +23,4 @@ public class Help extends SubCommand {
         return CommandManager.emptyList;
     }
 }
+
