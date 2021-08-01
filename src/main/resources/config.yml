@@ -73,7 +73,7 @@ updateWorldBorderInterval: 1
 msgOnRespawn: CHAT
 # Determines if the server will send a message/title to the server if the mob has
 # died and is attempting to respawn it.
-# Possible options: CHAT, TITLE, SUBTITLE, BOSSBAR, ACTIONBAR
+# Possible options: CHAT, TITLE, BOSSBAR, ACTIONBAR
 
 persistent: false
 # Determines if the WorldBorder location, enabled status, etc. will be persistent
