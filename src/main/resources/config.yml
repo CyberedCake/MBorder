@@ -24,7 +24,10 @@ overworld:
   # The color of the WorldBorder, possible colors are 'RED', 'BLUE', and 'GREEN'
 
   worldBorderDamage: 0.0
-  # How much damage the WorldBorder does per block outside the border
+  # How much damage the WorldBorder does per block outside the border, and then the one
+  # below controls how far out of the border you need to go in order to start taking damage
+  # (a.k.a. the 'buffer')
+  worldBorderBuffer: 0.0
 
   worldBorderTeleport: 50.0
   # How many blocks outside the WorldBorder you must be to get teleported back to safety
@@ -49,7 +52,10 @@ nether:
   # The color of the WorldBorder, possible colors are 'RED', 'BLUE', and 'GREEN'
 
   worldBorderDamage: 0.0
-  # How much damage the WorldBorder does per block outside the border
+  # How much damage the WorldBorder does per block outside the border, and then the one
+  # below controls how far out of the border you need to go in order to start taking damage
+  # (a.k.a. the 'buffer')
+  worldBorderBuffer: 0.0
 
   worldBorderTeleport: 50.0
   # How many blocks outside the WorldBorder you must be to get teleported back to safety
