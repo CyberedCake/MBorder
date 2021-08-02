@@ -4,6 +4,7 @@ import net.cybercake.mborder.Commands.CommandListeners;
 import net.cybercake.mborder.Commands.CommandManager;
 import net.cybercake.mborder.Commands.SubCommands.ToggleActive;
 import net.cybercake.mborder.Listeners.EntityDeath;
+import net.cybercake.mborder.Listeners.PlayerJoin;
 import net.cybercake.mborder.RepeatingTasks.RespawnMob;
 import net.cybercake.mborder.RepeatingTasks.TrackEntity;
 import net.cybercake.mborder.Utils.DataUtils;
@@ -25,6 +26,7 @@ public final class Main extends JavaPlugin {
     // vv "luckperms" may never be used but it's to tell the Utils class that luckperms does not exist
     public static boolean luckperms = false;
 
+    public static boolean justStarted;
     private static Main plugin;
 
     @Override
@@ -59,18 +61,13 @@ public final class Main extends JavaPlugin {
         if(!getConfig().getBoolean("persistent")) {
             TrackEntity.disableGame();
 
-            try {
-                Entity entityOverworld = Bukkit.getEntity(UUID.fromString(DataUtils.getCustomYmlString("data", "server.overworld.mobUUID")));
-                Entity entityNether = Bukkit.getEntity(UUID.fromString(DataUtils.getCustomYmlString("data", "server.nether.mobUUID")));
-                entityOverworld.remove();
-                entityNether.remove();
-            } catch (Exception e) { }
-
             DataUtils.setCustomYml("data", "server.overworld.centerLocation", new Location(ToggleActive.getMainWorld(), 0, 0, 0, 0, 0));
             DataUtils.setCustomYml("data", "server.overworld.mobUUID", 0);
 
             DataUtils.setCustomYml("data", "server.nether.centerLocation", new Location(Bukkit.getWorld(ToggleActive.getMainWorldString() + "_nether"), 0, 0, 0, 0, 0));
             DataUtils.setCustomYml("data", "server.nether.mobUUID", 0);
+        }else if(getConfig().getBoolean("persistent")) {
+            justStarted = true;
         }
 
         saveDefaultConfig();
@@ -82,6 +79,7 @@ public final class Main extends JavaPlugin {
 
         registerListener(new CommandListeners());
         registerListener(new EntityDeath());
+        registerListener(new PlayerJoin());
 
         registerRunnable(new TrackEntity(), Main.getMainConfig().getLong("updateWorldBorderInterval"));
         registerRunnable(new RespawnMob(), 40);
@@ -91,7 +89,25 @@ public final class Main extends JavaPlugin {
     }
 
     @Override
-    public void onDisable() { System.out.println("Disabled MBorder [v" + getPlugin(Main.class).getDescription().getVersion() + "]"); }
+    public void onDisable() {
+        if(DataUtils.getCustomYmlBoolean("data", "server.active")) {
+            try {
+                Entity entityOverworld = Bukkit.getEntity(UUID.fromString(DataUtils.getCustomYmlString("data", "server.overworld.mobUUID")));
+                Entity entityNether = Bukkit.getEntity(UUID.fromString(DataUtils.getCustomYmlString("data", "server.nether.mobUUID")));
+                entityOverworld.remove();
+                entityNether.remove();
+                System.out.println("MBorder successfully removed the entity in the overworld & nether");
+                System.out.println("[^^^ Note: This happens regardless of 'persistence' in the config! ^^^]");
+            } catch (Exception e) {
+                Bukkit.getLogger().severe("MBorder: An error occurred whilst attempting to remove mobs from worlds!");
+                Bukkit.getLogger().severe(" ");
+                Bukkit.getLogger().severe("Stack trace is below:");
+                Utils.printBetterStackTrace(e);
+            }
+            TrackEntity.disableGame();
+        }
+        System.out.println("Disabled MBorder [v" + getPlugin(Main.class).getDescription().getVersion() + "]");
+    }
 
     public static Main getPlugin() { return plugin; }
 
