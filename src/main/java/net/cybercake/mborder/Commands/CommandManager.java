@@ -33,6 +33,7 @@ public class CommandManager implements CommandExecutor, TabCompleter {
         subcommands.add(new CoordsCheck());
         subcommands.add(new ToggleActive());
         subcommands.add(new TPMob());
+        subcommands.add(new NextAutoRespawn());
     }
 
     @Override

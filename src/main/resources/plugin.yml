@@ -14,6 +14,7 @@ permissions:
       - mborder.command.coordscheck: true
       - mborder.command.toggleactive: true
       - mborder.command.tpmob: true
+      - mborder.command.nextautorespawn: true
   mborder.command.reload:
     description: Allowing a player this permission will give them the ability to use /mborder reload
     default: op
@@ -26,6 +27,9 @@ permissions:
   mborder.command.tpmob:
     description: Allowing a player this permission will give them the ability to use /mborder tpmob
     default: op
+  mborder.command.nextautorespawn:
+    description: Allowing a player this permission will give them the ability to use /mborder nextautorespawn
+    default: not op
 
 commands:
   mborder:
