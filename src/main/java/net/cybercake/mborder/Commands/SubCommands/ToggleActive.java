@@ -69,7 +69,7 @@ public class ToggleActive extends SubCommand {
     public static void spawnEntity(MEntityType entityType, Entity entity) {
         switch(entityType) {
             case OVERWORLD:
-                entity.getPersistentDataContainer().set(new NamespacedKey(Main.getPlugin(), "overworld.worldBorderAnimal"), PersistentDataType.INTEGER, 1);
+                entity.getPersistentDataContainer().set(new NamespacedKey(Main.getPlugin(), "worldBorderAnimal"), PersistentDataType.STRING, "OVERWORLD");
                 entity.setCustomName(Utils.chat(Main.getMainConfig().getString("overworld.worldBorderAnimalName")));
                 entity.setCustomNameVisible(true);
                 entity.setPersistent(true);
@@ -91,7 +91,7 @@ public class ToggleActive extends SubCommand {
                 if(Main.getMainConfig().getBoolean("overworld.worldBorderAnimalGlowing")) { entity.setGlowing(true); }
                 break;
             case NETHER:
-                entity.getPersistentDataContainer().set(new NamespacedKey(Main.getPlugin(), "nether.worldBorderAnimal"), PersistentDataType.INTEGER, 1);
+                entity.getPersistentDataContainer().set(new NamespacedKey(Main.getPlugin(), "worldBorderAnimal"), PersistentDataType.STRING, "NETHER");
                 entity.setCustomName(Utils.chat(Main.getMainConfig().getString("nether.worldBorderAnimalName")));
                 entity.setCustomNameVisible(true);
                 entity.setPersistent(true);
