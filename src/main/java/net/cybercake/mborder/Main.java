@@ -4,7 +4,6 @@ import net.cybercake.mborder.Commands.CommandListeners;
 import net.cybercake.mborder.Commands.CommandManager;
 import net.cybercake.mborder.Commands.SubCommands.ToggleActive;
 import net.cybercake.mborder.Listeners.EntityDeath;
-import net.cybercake.mborder.RepeatingTasks.AttemptRespawn;
 import net.cybercake.mborder.RepeatingTasks.TrackEntity;
 import net.cybercake.mborder.Utils.DataUtils;
 import net.cybercake.mborder.Utils.Utils;
@@ -83,7 +82,6 @@ public final class Main extends JavaPlugin {
         registerListener(new EntityDeath());
 
         registerRunnable(new TrackEntity(), Main.getMainConfig().getLong("updateWorldBorderInterval"));
-        registerRunnable(new AttemptRespawn(), 40);
 
         System.out.println("Enabled MBorder [v" + getPlugin(Main.class).getDescription().getVersion() + "]");
 
