@@ -30,16 +30,20 @@ public class ToggleActive extends SubCommand {
     public void perform(CommandSender sender, String[] args, Command command) {
         if(sender instanceof Player) {
             Player p = (Player) sender;
-            if(p.getWorld() != getMainWorld()) { p.sendMessage(Utils.chat("&cYou must be in the main Minecraft world specified in the server.properties to start the game!")); }
-            else if(!DataUtils.getCustomYmlBoolean("data", "server.active")) {
-                DataUtils.setCustomYml("data", "server.active", true);
-                DataUtils.setCustomYml("data", "server.overworld.centerLocation", p.getLocation());
+            if(!DataUtils.getCustomYmlBoolean("data", "server.active")) {
+                Location locationOverworld = Utils.getTopBlock(new Location(getMainWorld(), p.getLocation().getX(), 0, p.getLocation().getZ(), 0, 0), 100);
+                Location locationNether = Utils.getTopBlock(new Location(Bukkit.getWorld(getMainWorldString() + "_nether"), p.getLocation().getX(), 0, p.getLocation().getZ(), 0, 0), 100);
 
-                Entity entityoverworld = getMainWorld().spawnEntity(p.getLocation(), EntityType.valueOf(Main.getMainConfig().getString("overworld.worldBorderAnimal")));
+                DataUtils.setCustomYml("data", "server.active", true);
+                DataUtils.setCustomYml("data", "server.activeStart", Utils.getUnix());
+                DataUtils.setCustomYml("data", "server.overworld.centerLocation", locationOverworld);
+                DataUtils.setCustomYml("data", "server.nether.centerLocation", locationNether);
+
+                Entity entityoverworld = getMainWorld().spawnEntity(locationOverworld, EntityType.valueOf(Main.getMainConfig().getString("overworld.worldBorderAnimal")));
                 spawnEntity(MEntityType.OVERWORLD, entityoverworld);
                 DataUtils.setCustomYml("data", "server.overworld.mobUUID", entityoverworld.getUniqueId().toString());
 
-                Entity entitynether = Bukkit.getWorld(getMainWorldString() + "_nether").spawnEntity(new Location(Bukkit.getWorld(getMainWorldString() + "_nether"), 0.0, 100, 0.0), EntityType.valueOf(Main.getMainConfig().getString("nether.worldBorderAnimal")));
+                Entity entitynether = Bukkit.getWorld(getMainWorldString() + "_nether").spawnEntity(locationNether, EntityType.valueOf(Main.getMainConfig().getString("nether.worldBorderAnimal")));
                 spawnEntity(MEntityType.NETHER, entitynether);
                 DataUtils.setCustomYml("data", "server.nether.mobUUID", entitynether.getUniqueId().toString());
 

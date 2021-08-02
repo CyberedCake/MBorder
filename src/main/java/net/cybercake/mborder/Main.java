@@ -4,6 +4,7 @@ import net.cybercake.mborder.Commands.CommandListeners;
 import net.cybercake.mborder.Commands.CommandManager;
 import net.cybercake.mborder.Commands.SubCommands.ToggleActive;
 import net.cybercake.mborder.Listeners.EntityDeath;
+import net.cybercake.mborder.RepeatingTasks.RespawnMob;
 import net.cybercake.mborder.RepeatingTasks.TrackEntity;
 import net.cybercake.mborder.Utils.DataUtils;
 import net.cybercake.mborder.Utils.Utils;
@@ -16,6 +17,7 @@ import org.bukkit.entity.Entity;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.util.ArrayList;
 import java.util.UUID;
 
 public final class Main extends JavaPlugin {
@@ -82,6 +84,7 @@ public final class Main extends JavaPlugin {
         registerListener(new EntityDeath());
 
         registerRunnable(new TrackEntity(), Main.getMainConfig().getLong("updateWorldBorderInterval"));
+        registerRunnable(new RespawnMob(), 40);
 
         System.out.println("Enabled MBorder [v" + getPlugin(Main.class).getDescription().getVersion() + "]");
 

@@ -41,7 +41,7 @@ overworld:
   worldBorderAnimalGlowing: true
   # Determines if the WorldBorder animal will glow or not
 
-  worldBorderAnimalSilent: true
+  worldBorderAnimalSilent: false
   # Determines if the WorldBorder animal is silent or not
 
 nether:
@@ -69,17 +69,16 @@ nether:
   worldBorderAnimalGlowing: true
   # Determines if the WorldBorder animal will glow or not
 
-  worldBorderAnimalSilent: true
+  worldBorderAnimalSilent: false
   # Determines if the WorldBorder animal is silent or not
 
 updateWorldBorderInterval: 1
 # How long the WorldBorder gets the location of the animal and sets worldborder
 # accordingly. This value is in ticks (20 ticks = 1 second), cannot go below 1.
 
-msgOnRespawn: CHAT
-# Determines if the server will send a message/title to the server if the mob has
-# died and is attempting to respawn it.
-# Possible options: CHAT, TITLE, BOSSBAR, ACTIONBAR
+mobRespawnInterval: 1800
+# How long before the mob automatically gets respawned and teleported to the
+# highest block at which it is currently. This value is in seconds.
 
 persistent: false
 # Determines if the WorldBorder location, enabled status, etc. will be persistent
