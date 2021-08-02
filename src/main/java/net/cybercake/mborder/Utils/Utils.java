@@ -5,6 +5,7 @@ import net.luckperms.api.LuckPermsProvider;
 import net.luckperms.api.model.user.User;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -13,6 +14,7 @@ import java.lang.reflect.Method;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class Utils {
@@ -229,6 +231,32 @@ public class Utils {
         TICK_COUNT+= 1;
     }
 
+    public static Location getTopBlock(Location checkEmpty) {
+        checkEmpty.setY(255.0);
+        for(int i=0; i<255; i++) {
+            if(checkEmpty.getWorld().getBlockAt(checkEmpty).isPassable()) {
+                checkEmpty.setY(checkEmpty.getY()-1);
+            }else if(!checkEmpty.getWorld().getBlockAt(checkEmpty).isPassable()) {
+                checkEmpty.setY(checkEmpty.getY()+1);
+                return checkEmpty;
+            }
+        }
+        return null;
+    }
+
+    public static Location getTopBlock(Location checkEmpty, long yStartChecking) {
+        checkEmpty.setY(yStartChecking);
+        for(int i=0; i<yStartChecking; i++) {
+            if(checkEmpty.getWorld().getBlockAt(checkEmpty).isPassable()) {
+                checkEmpty.setY(checkEmpty.getY()-1);
+            }else if(!checkEmpty.getWorld().getBlockAt(checkEmpty).isPassable()) {
+                checkEmpty.setY(checkEmpty.getY()+1);
+                return checkEmpty;
+            }
+        }
+        return null;
+    }
+
     public static String getFormattedSeconds(long timeInSeconds, ReturnType returnType, boolean showExtraZeros) {
         long secondsLeft = timeInSeconds % 3600 % 60;
         long minutes = (long) Math.floor(timeInSeconds % 3600 / 60);
@@ -304,6 +332,30 @@ public class Utils {
                 seperators = Utils.chat(seperators + color + "&m ");
             }
             return seperators;
+        }
+    }
+
+    public static String getProgressBar(ChatColor used, ChatColor unused, long percentage) {
+        String progress = "";
+        int characters = 60;
+        for(int i=0; i<characters; i++) {
+
+        }
+        return null;
+    }
+
+    public static ArrayList<String> getBetterStackTrace(Exception e) {
+        ArrayList<String> stackTrace = new ArrayList<>();
+        stackTrace.add("  " + e.toString());
+        for(StackTraceElement element : e.getStackTrace()) {
+            stackTrace.add("    " + element.toString());
+        }
+        return stackTrace;
+    }
+
+    public static void printBetterStackTrace(Exception e) {
+        for(String str : getBetterStackTrace(e)) {
+            Bukkit.getLogger().severe(str);
         }
     }
 
@@ -475,19 +527,4 @@ public class Utils {
         player.sendMessage(sb.toString() + message);
     }
 
-    // XXXXXXXXXXXXXXXXXXXXXXX HOW TO DELAY XXXXXXXXXXXXXXXXXXXXXXX
-    // XXXXXXXXXXXXXXXXXXXXXXX TASK IN JAVA XXXXXXXXXXXXXXXXXXXXXXX
-    // MAIN CLASS -------------------------
-    //public static Main getPlugin() {
-    //	return plugin;
-    //}
-    //
-    // CLASS YOU WANT TO DO THINGS IN ---------------------------
-    //Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(Main.getPlugin(), CLASS NAME HERE::TASK NAME HERE, 100L);
-    //
-    //private static void TASK NAME HERE() {
-    //	PUT YOUR CODE HERE
-    //}
-    // XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-    // XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 }
