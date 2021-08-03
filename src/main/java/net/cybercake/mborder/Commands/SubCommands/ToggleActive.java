@@ -31,8 +31,8 @@ public class ToggleActive extends SubCommand {
         if(sender instanceof Player) {
             Player p = (Player) sender;
             if(!DataUtils.getCustomYmlBoolean("data", "server.active")) {
-                Location locationOverworld = Utils.getTopBlock(new Location(getMainWorld(), p.getLocation().getX(), 0, p.getLocation().getZ(), 0, 0), 100);
-                Location locationNether = Utils.getTopBlock(new Location(Bukkit.getWorld(getMainWorldString() + "_nether"), p.getLocation().getX(), 0, p.getLocation().getZ(), 0, 0), 100);
+                Location locationOverworld = Utils.getTopBlock(new Location(getMainWorld(), p.getLocation().getX(), 0, p.getLocation().getZ(), 0, 0), 120);
+                Location locationNether = Utils.getTopBlock(new Location(Bukkit.getWorld(getMainWorldString() + "_nether"), p.getLocation().getX(), 0, p.getLocation().getZ(), 0, 0), 120);
 
                 DataUtils.setCustomYml("data", "server.active", true);
                 DataUtils.setCustomYml("data", "server.activeStart", Utils.getUnix());
