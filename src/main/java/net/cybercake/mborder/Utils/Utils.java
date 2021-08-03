@@ -4,6 +4,9 @@ import net.cybercake.mborder.Main;
 import net.luckperms.api.LuckPermsProvider;
 import net.luckperms.api.model.user.User;
 import net.md_5.bungee.api.ChatColor;
+import net.md_5.bungee.api.ChatMessageType;
+import net.md_5.bungee.api.chat.BaseComponent;
+import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
@@ -335,13 +338,37 @@ public class Utils {
         }
     }
 
-    public static String getProgressBar(ChatColor used, ChatColor unused, long percentage) {
-        String progress = "";
-        int characters = 60;
-        for(int i=0; i<characters; i++) {
-
+    public static String getProgressBar(ChatColor used, ChatColor unused, double percentage, String spaceCharacter) {
+        String progress = Utils.chat("");
+        double percentageSoFar = 0.0;
+        int characters = 30;
+        for(double i=0; i<characters; i++) {
+            if(percentage > percentageSoFar) {
+                progress = progress + used + ChatColor.STRIKETHROUGH + spaceCharacter;
+            }else if(percentage <= percentageSoFar) {
+                progress = progress + unused + ChatColor.STRIKETHROUGH + spaceCharacter;
+            }else{
+                progress = progress + "&8&m" + spaceCharacter;
+            }
+            percentageSoFar = i / characters;
         }
-        return null;
+        return progress;
+    }
+
+    public static String getProgressBar(ChatColor used, ChatColor unused, double percentage, String spaceCharacter, int characters) {
+        String progress = Utils.chat("");
+        double percentageSoFar = 0.0;
+        for(double i=0; i<characters; i++) {
+            if(percentage > percentageSoFar) {
+                progress = progress + used + ChatColor.STRIKETHROUGH + spaceCharacter;
+            }else if(percentage <= percentageSoFar) {
+                progress = progress + unused + ChatColor.STRIKETHROUGH + spaceCharacter;
+            }else{
+                progress = progress + "&8&m" + spaceCharacter;
+            }
+            percentageSoFar = i / characters;
+        }
+        return progress;
     }
 
     public static ArrayList<String> getBetterStackTrace(Exception e) {
@@ -357,6 +384,18 @@ public class Utils {
         for(String str : getBetterStackTrace(e)) {
             Bukkit.getLogger().severe(str);
         }
+    }
+
+    public static void sendActionBar(Player player, String message) {
+        player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(message));
+    }
+
+    public static void sendActionBar(Player player, BaseComponent message) {
+        player.spigot().sendMessage(ChatMessageType.ACTION_BAR, message);
+    }
+
+    public static void sendActionBar(Player player, TextComponent message) {
+        player.spigot().sendMessage(ChatMessageType.ACTION_BAR, message);
     }
 
     public enum DefaultFontInfo {
