@@ -40,11 +40,11 @@ public class ToggleActive extends SubCommand {
                 DataUtils.setCustomYml("data", "server.nether.centerLocation", locationNether);
 
                 Entity entityoverworld = getMainWorld().spawnEntity(locationOverworld, EntityType.valueOf(Main.getMainConfig().getString("overworld.worldBorderAnimal")));
-                spawnEntity(MEntityType.OVERWORLD, entityoverworld);
+                spawnEntity("overworld", entityoverworld);
                 DataUtils.setCustomYml("data", "server.overworld.mobUUID", entityoverworld.getUniqueId().toString());
 
                 Entity entitynether = Bukkit.getWorld(getMainWorldString() + "_nether").spawnEntity(locationNether, EntityType.valueOf(Main.getMainConfig().getString("nether.worldBorderAnimal")));
-                spawnEntity(MEntityType.NETHER, entitynether);
+                spawnEntity("nether", entitynether);
                 DataUtils.setCustomYml("data", "server.nether.mobUUID", entitynether.getUniqueId().toString());
 
                 p.sendMessage(Utils.chat("&a&lGAME ENABLED!"));
@@ -66,57 +66,24 @@ public class ToggleActive extends SubCommand {
         return CommandManager.emptyList;
     }
 
-    public enum MEntityType {
-        OVERWORLD, NETHER
-    }
+    public static void spawnEntity(String worldType, Entity entity) {
+        entity.getPersistentDataContainer().set(new NamespacedKey(Main.getPlugin(), "worldBorderAnimal"), PersistentDataType.STRING, worldType);
+        entity.setCustomName(Utils.chat(Main.getMainConfig().getString(worldType + ".worldBorderAnimalName")));
+        entity.setCustomNameVisible(true);
+        entity.setPersistent(true);
+        LivingEntity livingEntity = (LivingEntity) entity;
+        livingEntity.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 999999, 15, false, false));
 
-    public static void spawnEntity(MEntityType entityType, Entity entity) {
-        switch(entityType) {
-            case OVERWORLD:
-                entity.getPersistentDataContainer().set(new NamespacedKey(Main.getPlugin(), "worldBorderAnimal"), PersistentDataType.STRING, "OVERWORLD");
-                entity.setCustomName(Utils.chat(Main.getMainConfig().getString("overworld.worldBorderAnimalName")));
-                entity.setCustomNameVisible(true);
-                entity.setPersistent(true);
-                LivingEntity livingEntityOverworld = (LivingEntity) entity;
-                livingEntityOverworld.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 999999, 15, false, false));
-
-                if(entity instanceof Pig) {
-                    Pig pig = (Pig) entity;
-                    pig.setSaddle(true);
-                }else if(entity instanceof AbstractHorse) {
-                    AbstractHorse horse = (AbstractHorse) entity;
-                    horse.setTamed(true);
-                    horse.getInventory().setSaddle(new ItemStack(Material.SADDLE));
-                }else if(entity instanceof Strider) {
-                    Strider strider = (Strider) entity;
-                    strider.setSaddle(true);
-                }
-                if(Main.getMainConfig().getBoolean("overworld.worldBorderAnimalSilent")) { entity.setSilent(true); }
-                if(Main.getMainConfig().getBoolean("overworld.worldBorderAnimalGlowing")) { entity.setGlowing(true); }
-                break;
-            case NETHER:
-                entity.getPersistentDataContainer().set(new NamespacedKey(Main.getPlugin(), "worldBorderAnimal"), PersistentDataType.STRING, "NETHER");
-                entity.setCustomName(Utils.chat(Main.getMainConfig().getString("nether.worldBorderAnimalName")));
-                entity.setCustomNameVisible(true);
-                entity.setPersistent(true);
-                LivingEntity livingEntityNether = (LivingEntity) entity;
-                livingEntityNether.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 999999, 15, false, false));
-
-                if(entity instanceof Pig) {
-                    Pig pig = (Pig) entity;
-                    pig.setSaddle(true);
-                }else if(entity instanceof AbstractHorse) {
-                    AbstractHorse horse = (AbstractHorse) entity;
-                    horse.setTamed(true);
-                    horse.getInventory().setSaddle(new ItemStack(Material.SADDLE));
-                }else if(entity instanceof Strider) {
-                    Strider strider = (Strider) entity;
-                    strider.setSaddle(true);
-                }
-                if(Main.getMainConfig().getBoolean("nether.worldBorderAnimalSilent")) { entity.setSilent(true); }
-                if(Main.getMainConfig().getBoolean("nether.worldBorderAnimalGlowing")) { entity.setGlowing(true); }
-                break;
+        if(entity instanceof Steerable) {
+            Steerable vehicle = (Steerable) entity;
+            vehicle.setSaddle(true);
+        }else if(entity instanceof AbstractHorse) {
+            AbstractHorse horse = (AbstractHorse) entity;
+            horse.setTamed(true);
+            horse.getInventory().setSaddle(new ItemStack(Material.SADDLE));
         }
+        if(Main.getMainConfig().getBoolean(worldType + ".worldBorderAnimalSilent")) { entity.setSilent(true); }
+        if(Main.getMainConfig().getBoolean(worldType + ".worldBorderAnimalGlowing")) { entity.setGlowing(true); }
     }
 
     public static World getMainWorld() {

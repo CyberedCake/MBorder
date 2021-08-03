@@ -8,7 +8,6 @@ import org.bukkit.*;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 
-import java.util.Locale;
 import java.util.UUID;
 
 public class RespawnMob implements Runnable{
@@ -34,7 +33,7 @@ public class RespawnMob implements Runnable{
         }
         Location location = Utils.getTopBlock(DataUtils.getCustomYmlLocation("data", "server." + worldType + ".centerLocation"), 120);
         Entity entity = world.spawnEntity(location, EntityType.valueOf(Main.getMainConfig().getString(worldType + ".worldBorderAnimal")));
-        ToggleActive.spawnEntity(ToggleActive.MEntityType.valueOf(worldType.toUpperCase(Locale.ROOT)), entity);
+        ToggleActive.spawnEntity(worldType, entity);
         DataUtils.setCustomYml("data", "server." + worldType + ".mobUUID", entity.getUniqueId().toString());
         DataUtils.setCustomYml("data", "server.activeStart", Utils.getUnix());
         Bukkit.getOnlinePlayers().forEach(player -> player.playSound(entity.getLocation(), Sound.ENTITY_ENDER_EYE_DEATH, 1F, 1F));

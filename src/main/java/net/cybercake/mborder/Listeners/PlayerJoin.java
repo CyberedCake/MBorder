@@ -37,11 +37,11 @@ public class PlayerJoin implements Listener {
         DataUtils.setCustomYml("data", "server.activeOnRestart", false);
 
         Entity entityoverworld = ToggleActive.getMainWorld().spawnEntity(DataUtils.getCustomYmlLocation("data", "server.overworld.centerLocation"), EntityType.valueOf(Main.getMainConfig().getString("overworld.worldBorderAnimal")));
-        ToggleActive.spawnEntity(ToggleActive.MEntityType.OVERWORLD, entityoverworld);
+        ToggleActive.spawnEntity("overworld", entityoverworld);
         DataUtils.setCustomYml("data", "server.overworld.mobUUID", entityoverworld.getUniqueId().toString());
 
         Entity entitynether = Bukkit.getWorld(ToggleActive.getMainWorldString() + "_nether").spawnEntity(DataUtils.getCustomYmlLocation("data", "server.nether.centerLocation"), EntityType.valueOf(Main.getMainConfig().getString("nether.worldBorderAnimal")));
-        ToggleActive.spawnEntity(ToggleActive.MEntityType.NETHER, entitynether);
+        ToggleActive.spawnEntity("nether", entitynether);
         DataUtils.setCustomYml("data", "server.nether.mobUUID", entitynether.getUniqueId().toString());
     }
 
