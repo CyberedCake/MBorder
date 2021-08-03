@@ -6,6 +6,5 @@
 - Join/leave/death messages
 
 ## Plugin Package
-- If you go far outside the border, teleport back to spawn ... make configurable
 - Starter tools, basic stone tools + apples ... make configurable
-~~- Fix MBorder entities being able to go through portals~~ [Fixed by setting portal cooldown to 1 every tick]
+- ~~Fix MBorder entities being able to go through portals~~ [Fixed by setting portal cooldown to 1 every tick]
