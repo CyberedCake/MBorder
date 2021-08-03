@@ -15,28 +15,34 @@ public class PlayerJoin implements Listener {
 
     @EventHandler
     public void playerJoin(PlayerJoinEvent e) {
-        if(Main.justStarted) {
-            Main.justStarted = false;
-            try {
-                DataUtils.setCustomYml("data", "server.active", true);
-                DataUtils.setCustomYml("data", "server.activeStart", Utils.getUnix());
+        if(DataUtils.getCustomYmlBoolean("data", "server.active")) return;
+        if(!Main.justStarted) return;
 
-                Entity entityoverworld = ToggleActive.getMainWorld().spawnEntity(DataUtils.getCustomYmlLocation("data", "server.overworld.centerLocation"), EntityType.valueOf(Main.getMainConfig().getString("overworld.worldBorderAnimal")));
-                ToggleActive.spawnEntity(ToggleActive.MEntityType.OVERWORLD, entityoverworld);
-                DataUtils.setCustomYml("data", "server.overworld.mobUUID", entityoverworld.getUniqueId().toString());
-
-                Entity entitynether = Bukkit.getWorld(ToggleActive.getMainWorldString() + "_nether").spawnEntity(DataUtils.getCustomYmlLocation("data", "server.nether.centerLocation"), EntityType.valueOf(Main.getMainConfig().getString("nether.worldBorderAnimal")));
-                ToggleActive.spawnEntity(ToggleActive.MEntityType.NETHER, entitynether);
-                DataUtils.setCustomYml("data", "server.nether.mobUUID", entitynether.getUniqueId().toString());
-                System.out.println("Successfully started the game again because persistence in the config is set to 'true'!");
-            } catch (Exception ex) {
-                DataUtils.setCustomYml("data", "server.active", false);
-                Bukkit.getLogger().severe("MBorder: An error occurred whilst attempting to respawn mobs from the last server instance, disabling game...");
-                Bukkit.getLogger().severe(" ");
-                Bukkit.getLogger().severe("Stack trace is below:");
-                Utils.printBetterStackTrace(ex);
-            }
+        Main.justStarted = false;
+        try {
+            justStarted();
+            System.out.println("Successfully started the game again because persistence in the config is set to 'true'!");
+        } catch (Exception ex) {
+            DataUtils.setCustomYml("data", "server.active", false);
+            Bukkit.getLogger().severe("MBorder: An error occurred whilst attempting to respawn mobs from the last server instance, disabling game...");
+            Bukkit.getLogger().severe(" ");
+            Bukkit.getLogger().severe("Stack trace is below:");
+            Utils.printBetterStackTrace(ex);
         }
+    }
+
+    public static void justStarted() {
+        DataUtils.setCustomYml("data", "server.active", true);
+        DataUtils.setCustomYml("data", "server.activeStart", Utils.getUnix());
+        DataUtils.setCustomYml("data", "server.activeOnRestart", false);
+
+        Entity entityoverworld = ToggleActive.getMainWorld().spawnEntity(DataUtils.getCustomYmlLocation("data", "server.overworld.centerLocation"), EntityType.valueOf(Main.getMainConfig().getString("overworld.worldBorderAnimal")));
+        ToggleActive.spawnEntity(ToggleActive.MEntityType.OVERWORLD, entityoverworld);
+        DataUtils.setCustomYml("data", "server.overworld.mobUUID", entityoverworld.getUniqueId().toString());
+
+        Entity entitynether = Bukkit.getWorld(ToggleActive.getMainWorldString() + "_nether").spawnEntity(DataUtils.getCustomYmlLocation("data", "server.nether.centerLocation"), EntityType.valueOf(Main.getMainConfig().getString("nether.worldBorderAnimal")));
+        ToggleActive.spawnEntity(ToggleActive.MEntityType.NETHER, entitynether);
+        DataUtils.setCustomYml("data", "server.nether.mobUUID", entitynether.getUniqueId().toString());
     }
 
 }
