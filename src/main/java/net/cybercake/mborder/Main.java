@@ -4,7 +4,7 @@ import net.cybercake.mborder.Commands.CommandListeners;
 import net.cybercake.mborder.Commands.CommandManager;
 import net.cybercake.mborder.Commands.SubCommands.ToggleActive;
 import net.cybercake.mborder.Listeners.EntityDeath;
-import net.cybercake.mborder.Listeners.PlayerDamage;
+import net.cybercake.mborder.Listeners.EntityDamageByEntity;
 import net.cybercake.mborder.Listeners.PlayerJoin;
 import net.cybercake.mborder.RepeatingTasks.RespawnMob;
 import net.cybercake.mborder.RepeatingTasks.TrackEntity;
@@ -78,7 +78,7 @@ public final class Main extends JavaPlugin {
         registerListener(new CommandListeners());
         registerListener(new EntityDeath());
         registerListener(new PlayerJoin());
-        registerListener(new PlayerDamage());
+        registerListener(new EntityDamageByEntity());
 
         registerRunnable(new TrackEntity(), Main.getMainConfig().getLong("updateWorldBorderInterval"));
         registerRunnable(new RespawnMob(), 40);
