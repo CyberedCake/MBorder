@@ -44,6 +44,8 @@ public class TrackEntity implements Runnable {
             DataUtils.setCustomYml("data", "server.overworld.centerLocation", overworldentity.getLocation());
             overworld.setSpawnLocation(DataUtils.getCustomYmlLocation("data", "server.overworld.centerLocation"));
             overworld.setGameRule(GameRule.SPAWN_RADIUS, 40);
+
+            overworldentity.setPortalCooldown(5);
         }
 
         Entity netherentity = Bukkit.getEntity(UUID.fromString(DataUtils.getCustomYmlString("data", "server.nether.mobUUID")));
@@ -69,6 +71,8 @@ public class TrackEntity implements Runnable {
             DataUtils.setCustomYml("data", "server.nether.centerLocation", netherentity.getLocation());
             nether.setSpawnLocation(DataUtils.getCustomYmlLocation("data", "server.nether.centerLocation"));
             nether.setGameRule(GameRule.SPAWN_RADIUS, 40);
+
+            netherentity.setPortalCooldown(5);
         }
     }
 
