@@ -20,6 +20,8 @@ about that command.
 
 `/mborder tpmob <overworld/nether>` - Teleport to one of the mobs, if the game is active. Useful for developers. **[Permission: mborder.command.tpmob]**
 
+`/mborder nextautorespawn` - Allows you to see when the next auto-respawn of the mob will be. **[Permission: mborder.command.nextautorespawn]**
+
 `/mborder update` - Checks if there is an update to the plugin. If there is, it will provide a download link to the latest version. **[Permission:
 mborder.command.update]**
 
