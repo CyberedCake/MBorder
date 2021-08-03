@@ -16,9 +16,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
-// I am going to be using the CommandManager from https://gitlab.com/kodysimpson/command-manager-spigot, though slightly modified
-
 public class CommandManager implements CommandExecutor, TabCompleter {
+
+    // I am going to be using the CommandManager from https://gitlab.com/kodysimpson/command-manager-spigot, though slightly modified
 
     private final ArrayList<SubCommand> subcommands = new ArrayList<>();
     public static ArrayList<String> emptyList = new ArrayList<>();
@@ -159,6 +159,7 @@ public class CommandManager implements CommandExecutor, TabCompleter {
                             use = true;
                         }
                         if(!use) {
+
                             for(String cmdAlias : cmd.getAliases()) {
                                 if(args[0].equalsIgnoreCase(cmdAlias)) {
                                     use = true;
@@ -187,22 +188,18 @@ public class CommandManager implements CommandExecutor, TabCompleter {
         return emptyList;
     }
 
-    public static List<String> createReturnList(List<String> list, String string) {
-        if (string.length() == 0) {
-            return list;
-        }
+    public static List<String> createReturnList(List<String> completions, String currentArg) {
+        if (currentArg.length() <= 0) { return completions; }
 
-        String input = string.toLowerCase(Locale.ROOT);
-        List<String> returnList = new ArrayList<>();
+        currentArg = currentArg.toLowerCase(Locale.ROOT);
+        List<String> returnedCompletions = new ArrayList<>();
 
-        for (String item : list) {
-            if (item.toLowerCase(Locale.ROOT).contains(input)) {
-                returnList.add(item);
-            } else if (item.equalsIgnoreCase(input)) {
-                return emptyList;
+        for (String str : completions) {
+            if (str.toLowerCase(Locale.ROOT).contains(currentArg)) {
+                returnedCompletions.add(str);
             }
         }
 
-        return returnList;
+        return returnedCompletions;
     }
 }
