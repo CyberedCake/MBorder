@@ -4,6 +4,7 @@ import net.cybercake.mborder.Commands.CommandListeners;
 import net.cybercake.mborder.Commands.CommandManager;
 import net.cybercake.mborder.Commands.SubCommands.ToggleActive;
 import net.cybercake.mborder.Listeners.EntityDeath;
+import net.cybercake.mborder.Listeners.PlayerDamage;
 import net.cybercake.mborder.Listeners.PlayerJoin;
 import net.cybercake.mborder.RepeatingTasks.RespawnMob;
 import net.cybercake.mborder.RepeatingTasks.TrackEntity;
@@ -17,8 +18,6 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Entity;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
-
-import java.util.ArrayList;
 import java.util.UUID;
 
 public final class Main extends JavaPlugin {
@@ -40,7 +39,7 @@ public final class Main extends JavaPlugin {
             getLogger().severe(" ");
             getLogger().severe("--- PLUGIN DISABLED ----");
             getLogger().severe(" ");
-            getLogger().severe(Utils.chat("The plugin MBorder only works on servers with versions &a1.17.1&c!"));
+            getLogger().severe(Utils.chat("The plugin MBorder only works on servers with versions &a1.17 or 1.17.1&c!"));
             getLogger().severe(" ");
             getLogger().severe("Hopefully later, we will support all 1.16 versions. But for now, that is not the case");
             getLogger().severe(" ");
@@ -49,14 +48,9 @@ public final class Main extends JavaPlugin {
             getServer().getPluginManager().disablePlugin(this);
         }
 
-        if(!getConfig().getBoolean("enabled")) {
-            disablePlugin();
-            return;
-        }
+        if(!getConfig().getBoolean("enabled")) { disablePlugin(); return; }
 
-        if(!DataUtils.getCustomYmlFile("data").exists()) {
-            saveResource("data.yml", false);
-        }
+        if(!DataUtils.getCustomYmlFile("data").exists()) { saveResource("data.yml", false); }
 
         if(!getConfig().getBoolean("persistent")) {
             TrackEntity.disableGame();
@@ -67,7 +61,11 @@ public final class Main extends JavaPlugin {
             DataUtils.setCustomYml("data", "server.nether.centerLocation", new Location(Bukkit.getWorld(ToggleActive.getMainWorldString() + "_nether"), 0, 0, 0, 0, 0));
             DataUtils.setCustomYml("data", "server.nether.mobUUID", 0);
         }else if(getConfig().getBoolean("persistent")) {
-            justStarted = true;
+            if(Bukkit.getOnlinePlayers().size() >= 1) {
+                PlayerJoin.justStarted();
+            }else{
+                justStarted = true;
+            }
         }
 
         saveDefaultConfig();
@@ -80,24 +78,28 @@ public final class Main extends JavaPlugin {
         registerListener(new CommandListeners());
         registerListener(new EntityDeath());
         registerListener(new PlayerJoin());
+        registerListener(new PlayerDamage());
 
         registerRunnable(new TrackEntity(), Main.getMainConfig().getLong("updateWorldBorderInterval"));
         registerRunnable(new RespawnMob(), 40);
 
-        System.out.println("Enabled MBorder [v" + getPlugin(Main.class).getDescription().getVersion() + "]");
+        Bukkit.getLogger().info("Enabled MBorder [v" + getPlugin(Main.class).getDescription().getVersion() + "]");
 
     }
 
     @Override
     public void onDisable() {
         if(DataUtils.getCustomYmlBoolean("data", "server.active")) {
+            DataUtils.setCustomYml("data", "server.activeOnRestart", true);
             try {
                 Entity entityOverworld = Bukkit.getEntity(UUID.fromString(DataUtils.getCustomYmlString("data", "server.overworld.mobUUID")));
                 Entity entityNether = Bukkit.getEntity(UUID.fromString(DataUtils.getCustomYmlString("data", "server.nether.mobUUID")));
+
                 entityOverworld.remove();
                 entityNether.remove();
-                System.out.println("MBorder successfully removed the entity in the overworld & nether");
-                System.out.println("[^^^ Note: This happens regardless of 'persistence' in the config! ^^^]");
+
+                Bukkit.getLogger().info("MBorder successfully removed the entity in the overworld & nether");
+                Bukkit.getLogger().info("[^^^ Note: This happens regardless of 'persistence' in the config! ^^^]");
             } catch (Exception e) {
                 Bukkit.getLogger().severe("MBorder: An error occurred whilst attempting to remove mobs from worlds!");
                 Bukkit.getLogger().severe(" ");
@@ -106,7 +108,7 @@ public final class Main extends JavaPlugin {
             }
             TrackEntity.disableGame();
         }
-        System.out.println("Disabled MBorder [v" + getPlugin(Main.class).getDescription().getVersion() + "]");
+        Bukkit.getLogger().info("Disabled MBorder [v" + getPlugin(Main.class).getDescription().getVersion() + "]");
     }
 
     public static Main getPlugin() { return plugin; }
