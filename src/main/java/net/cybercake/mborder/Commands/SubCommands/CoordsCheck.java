@@ -33,16 +33,16 @@ public class CoordsCheck extends SubCommand {
                     }else if(p.getWorld().equals(Bukkit.getWorld(ToggleActive.getMainWorldString() + "_nether"))){
                         type = "nether";
                     }else{
-                        p.sendMessage(Utils.chat("&cInvalid usage! &7/mborder coordscheck [<x> <y> <z>]"));
+                        p.sendMessage(Utils.chat("&cInvalid usage! &7" + this.getUsage()));
                         return;
                     }
                     p.sendMessage(Utils.chat("&fYou are &e" + Utils.formatLong(Math.round(p.getLocation().distance(DataUtils.getCustomYmlLocation("data", "server." + type + ".centerLocation")))) + " &fblocks away from &athe center&r &8(&7x" + Math.round(DataUtils.getCustomYmlLocation("data", "server." + type + ".centerLocation").getX()) + " y" + Math.round(DataUtils.getCustomYmlLocation("data", "server." + type + ".centerLocation").getY()) + " z" + Math.round(DataUtils.getCustomYmlLocation("data", "server." + type + ".centerLocation").getZ()) + "&8)"));
                 }else{
-                    p.sendMessage(Utils.chat("&cInvalid usage! &7/mborder coordscheck [<x> <y> <z>]"));
+                    p.sendMessage(Utils.chat("&cInvalid usage! &7" + this.getUsage()));
                 }
             }
-            else if(args.length < 4) { p.sendMessage(Utils.chat("&cInvalid usage! &7/mborder coordscheck [<x> <y> <z>]")); }
-            else if((!isInt(args[1])) || (!isInt(args[2])) || (!isInt(args[3]))) { p.sendMessage(Utils.chat("&cInvalid integer! &7/mborder coordscheck [<x> <y> <z>]")); }
+            else if(args.length < 4) { p.sendMessage(Utils.chat("&cInvalid usage! &7" + this.getUsage())); }
+            else if((!isInt(args[1])) || (!isInt(args[2])) || (!isInt(args[3]))) { p.sendMessage(Utils.chat("&cInvalid integer! &7" + this.getUsage())); }
             else {
                 Location playerLocation = p.getLocation();
                 Location specificLocation = new Location(p.getWorld(), Integer.parseInt(args[1]), Integer.parseInt(args[2]), Integer.parseInt(args[3]));

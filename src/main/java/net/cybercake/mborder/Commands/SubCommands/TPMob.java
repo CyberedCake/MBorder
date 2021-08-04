@@ -26,7 +26,7 @@ public class TPMob extends SubCommand {
             Player p = (Player) sender;
             if(DataUtils.getCustomYmlBoolean("data", "server.active")) {
                 if(args.length < 2) {
-                    p.sendMessage(Utils.chat("&cInvalid usage! &7/mborder tpmob <overworld/nether>"));
+                    p.sendMessage(Utils.chat("&cInvalid usage! &7" + this.getUsage()));
                 }else{
                     if(args[1].equals("overworld") || args[1].equals("nether")) {
                         Location location = DataUtils.getCustomYmlLocation("data", "server." + args[1] + ".centerLocation");
