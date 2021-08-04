@@ -31,7 +31,7 @@ public class Reload extends SubCommand {
             }
         }else{
             if(!Main.getMainConfig().getBoolean("enabled")) { sender.sendMessage(Utils.chat("&6It seems as though you have set &a'enabled' &6to &cfalse&6. &d&l&nYOU MUST RESTART THE SERVER FOR THIS OPTION TO TAKE EFFECT!"));}
-            sender.sendMessage(Utils.chat("&aSuccessfully reloaded the configuration files in &f" + msAfter + "&fms&a!"));
+            sender.sendMessage(Utils.chat("&aSuccessfully &freloaded the configuration files in &e" + msAfter + "&ems&f!"));
         }
     }
 
