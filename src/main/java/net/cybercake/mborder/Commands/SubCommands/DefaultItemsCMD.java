@@ -21,7 +21,7 @@ import java.util.List;
 public class DefaultItemsCMD extends SubCommand {
 
     public DefaultItemsCMD() {
-        super("defaultitems", "mborder.command.defaultitems", "Gives you the default starter items, defined in default-items.yml", "/mborder defaultitems", new String[]{"starteritems", "items"});
+        super("defaultitems", "mborder.command.defaultitems", "Gives you the default starter items, defined in default-items.yml", "/mborder defaultitems [player]", new String[]{"starteritems", "items"});
     }
 
     @Override
@@ -32,9 +32,23 @@ public class DefaultItemsCMD extends SubCommand {
                 p.sendMessage(Utils.chat("&cGiving items to new players has been disabled in the &6default-items.yml&c, ask an administrator with the correct permissions to change it."));
                 return;
             }
+            if(getCustomItems().size() <= 0) {
+                p.sendMessage(Utils.chat("&cCould not detect any custom items in the &6default-items.yml&c, try adding some?"));
+                return;
+            }
 
-            for(ItemStack items : getCustomItems()) {
-                p.getInventory().addItem(items);
+            if(args.length < 2) {
+                for(ItemStack items : getCustomItems()) {
+                    p.getInventory().addItem(items);
+                }
+            } else if (args.length > 1) {
+                Player target = Bukkit.getPlayerExact(args[1]);
+                if(target == null) {p.sendMessage(Utils.chat("&cInvalid online player! &7" + this.getUsage())); return;}
+
+                p.sendMessage(Utils.chat("&fYou gave &e" + target.getName() + " &fthe default items!"));
+                for(ItemStack items : getCustomItems()) {
+                    target.getInventory().addItem(items);
+                }
             }
         }else{
             Main.logError("Only players can execute this sub-command!");
@@ -43,10 +57,15 @@ public class DefaultItemsCMD extends SubCommand {
 
     @Override
     public List<String> tab(CommandSender sender, String[] args) {
+        if(args.length <= 2) {
+            ArrayList<String> names = new ArrayList<>();
+            Bukkit.getOnlinePlayers().forEach(player -> names.add(player.getName()));
+            return names;
+        }
         return CommandManager.emptyList;
     }
 
-    public static ArrayList<Material> getCustomItemsMaterial() {
+    public static ArrayList<Material> getCustomItemMaterials() {
         ArrayList<Material> items = new ArrayList<>();
         for(String str : DefaultItems.getItems().getConfigurationSection("starterItems").getKeys(false)) {
             items.add(Material.valueOf(str));
@@ -61,13 +80,13 @@ public class DefaultItemsCMD extends SubCommand {
             ItemMeta newItemMeta = newItem.getItemMeta();
 
             // Default items: Custom name
-            if(!DefaultItems.getItems().getString("starterItems." + str + ".customName").equalsIgnoreCase("empty")) {
+            if(DefaultItems.getItems().getString("starterItems." + str + ".customName") != null) {
                 newItemMeta.setDisplayName(Utils.chat(DefaultItems.getItems().getString("starterItems." + str + ".customName")));
             }
 
             // Default items: Lore
             List<String> lore = new ArrayList<>();
-            if(!DefaultItems.getItems().getStringList("starterItems." + str + ".customLore").get(0).equalsIgnoreCase("empty")) {
+            if(DefaultItems.getItems().getStringList("starterItems." + str + ".customLore").size() > 0) {
                 for(String loreActual : DefaultItems.getItems().getStringList("starterItems." + str + ".customLore")) {
                     if(!loreActual.startsWith("paginate:")) {
                         lore.add(Utils.chat(loreActual));
