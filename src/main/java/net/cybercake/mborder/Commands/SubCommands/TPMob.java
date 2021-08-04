@@ -2,6 +2,7 @@ package net.cybercake.mborder.Commands.SubCommands;
 
 import net.cybercake.mborder.Commands.CommandManager;
 import net.cybercake.mborder.Commands.SubCommand;
+import net.cybercake.mborder.Main;
 import net.cybercake.mborder.Utils.DataUtils;
 import net.cybercake.mborder.Utils.Utils;
 import org.bukkit.Location;
@@ -48,7 +49,7 @@ public class TPMob extends SubCommand {
                 p.sendMessage(Utils.chat("&cThe game must be active for you to teleport to the entity!"));
             }
         }else{
-            System.out.println("Only players can execute this sub-command!");
+            Main.logError("Only players can execute this sub-command!");
         }
     }
 

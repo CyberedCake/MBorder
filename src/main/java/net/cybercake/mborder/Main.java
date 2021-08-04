@@ -75,6 +75,7 @@ public final class Main extends JavaPlugin {
 
         DefaultItems.saveDefaultItems();
         DefaultItems.reloadItems();
+
         registerCommand("mborder", new CommandManager());
 
         registerTabCompleter("mborder", new CommandManager());
@@ -87,7 +88,7 @@ public final class Main extends JavaPlugin {
         registerRunnable(new TrackEntity(), Main.getMainConfig().getLong("updateWorldBorderInterval"));
         registerRunnable(new RespawnMob(), 40);
 
-        Bukkit.getLogger().info("Enabled MBorder [v" + getPlugin(Main.class).getDescription().getVersion() + "]");
+        logInfo("Enabled MBorder [v" + getPlugin(Main.class).getDescription().getVersion() + "]");
 
     }
 
@@ -112,12 +113,8 @@ public final class Main extends JavaPlugin {
             }
             TrackEntity.disableGame();
         }
-        Bukkit.getLogger().info("Disabled MBorder [v" + getPlugin(Main.class).getDescription().getVersion() + "]");
+        logInfo("Disabled MBorder [v" + getPlugin(Main.class).getDescription().getVersion() + "]");
     }
-
-    public static Main getPlugin() { return plugin; }
-
-    public static FileConfiguration getMainConfig() { return plugin.getConfig(); }
 
     public static void disablePlugin() {
         getPlugin(Main.class).getPluginLoader().disablePlugin(plugin);
@@ -127,6 +124,14 @@ public final class Main extends JavaPlugin {
         Bukkit.getLogger().severe("Go to the config and change 'enabled' to 'true' to enable this plugin, then restart the server.");
         Bukkit.getLogger().severe(" ");
     }
+
+
+    public static Main getPlugin() { return plugin; }
+    public static FileConfiguration getMainConfig() { return plugin.getConfig(); }
+    public static String getPluginPrefix() { return getPlugin(Main.class).getDescription().getPrefix(); }
+    public static void logInfo(String msg) { Bukkit.getLogger().info("[" + getPluginPrefix() + "] " + msg); }
+    public static void logWarn(String msg) { Bukkit.getLogger().warning("[" + getPluginPrefix() + "] " + msg); }
+    public static void logError(String msg) { Bukkit.getLogger().severe("[" + getPluginPrefix() + "] " + msg); }
 
     public static void registerCommand(String name, CommandExecutor commandExecutor) { plugin.getCommand(name).setExecutor(commandExecutor); }
     public static void registerTabCompleter(String name, TabCompleter tabCompleter) { plugin.getCommand(name).setTabCompleter(tabCompleter); }

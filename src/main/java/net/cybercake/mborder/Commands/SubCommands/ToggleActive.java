@@ -61,7 +61,7 @@ public class ToggleActive extends SubCommand {
                 p.sendMessage(Utils.chat("&c&lGAME DISABLED!"));
                 p.sendMessage(Utils.chat("&7&oThe game has been ended!"));
             }
-        } else { System.out.println("Only players can execute this sub-command!"); }
+        } else { Main.logError("Only players can execute this sub-command!"); }
     }
 
     @Override

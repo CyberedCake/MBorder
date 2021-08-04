@@ -2,6 +2,7 @@ package net.cybercake.mborder.Commands.SubCommands;
 
 import net.cybercake.mborder.Commands.CommandManager;
 import net.cybercake.mborder.Commands.SubCommand;
+import net.cybercake.mborder.Main;
 import net.cybercake.mborder.Utils.DataUtils;
 import net.cybercake.mborder.Utils.Utils;
 import org.bukkit.Bukkit;
@@ -49,7 +50,7 @@ public class CoordsCheck extends SubCommand {
                 p.sendMessage(Utils.chat("&fYou are &e" + Utils.formatLong(Math.round(playerLocation.distance(specificLocation))) + " &fblocks away from &ax" + args[1] + " y" + args[2] + " z" + args[3] + "&f!"));
             }
         }else{
-            System.out.println("Only players can execute this sub-command!");
+            Main.logError("Only players can execute this sub-command!");
         }
     }
 
