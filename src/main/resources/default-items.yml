@@ -49,7 +49,7 @@ starterItems:
     customLore:
       - 'paginate:&7A starter item created by &aCyberedCake &7in &dMBorder &7as a default item.'
       - ' '
-      - '&fChange this in the &bconfig.yml&f!'
+      - '&fChange this in the &bdefault-items.yml&f!'
     hideNBT: true
   STONE_SHOVEL:
     amount: 1
@@ -57,7 +57,7 @@ starterItems:
     customLore:
       - 'paginate:&7A starter item created by &aCyberedCake &7in &dMBorder &7as a default item.'
       - ' '
-      - '&fChange this in the &bconfig.yml&f!'
+      - '&fChange this in the &bdefault-items.yml&f!'
     hideNBT: true
   STONE_PICKAXE:
     amount: 1
@@ -65,7 +65,7 @@ starterItems:
     customLore:
       - 'paginate:&7A starter item created by &aCyberedCake &7in &dMBorder &7as a default item.'
       - ' '
-      - '&fChange this in the &bconfig.yml&f!'
+      - '&fChange this in the &bdefault-items.yml&f!'
     hideNBT: true
   STONE_AXE:
     amount: 1
@@ -73,7 +73,7 @@ starterItems:
     customLore:
       - 'paginate:&7A starter item created by &aCyberedCake &7in &dMBorder &7as a default item.'
       - ' '
-      - '&fChange this in the &bconfig.yml&f!'
+      - '&fChange this in the &bdefault-items.yml&f!'
     hideNBT: true
   APPLE:
     amount: 16
@@ -81,7 +81,7 @@ starterItems:
     customLore:
       - 'paginate:&7A starter item created by &aCyberedCake &7in &dMBorder &7as a default item.'
       - ' '
-      - '&fChange this in the &bconfig.yml&f!'
+      - '&fChange this in the &bdefault-items.yml&f!'
     hideNBT: true
 
 
