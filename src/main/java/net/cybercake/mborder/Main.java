@@ -36,6 +36,7 @@ public final class Main extends JavaPlugin {
         String version = serverVersion.substring(serverVersion.lastIndexOf('.') + 1);
 
         if(!version.equals("v1_17_R1")) {
+            getLogger().severe(" ");
             getLogger().severe("--- PLUGIN DISABLED ----");
             getLogger().severe(" ");
             getLogger().severe(Utils.chat("The plugin MBorder only works on servers with versions &a1.17 or 1.17.1&c!"));
@@ -43,6 +44,7 @@ public final class Main extends JavaPlugin {
             getLogger().severe("Hopefully later, we will support all 1.16 versions. But for now, that is not the case");
             getLogger().severe(" ");
             getLogger().severe("--- PLUGIN DISABLED ----");
+            getLogger().severe(" ");
             getServer().getPluginManager().disablePlugin(this);
         }
 
