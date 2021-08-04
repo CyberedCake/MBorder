@@ -35,7 +35,7 @@
 #            - '<custom lore list :: line 4>'     'paginate:' before the lore, it will automatically put it on
 #            - '<custom lore list :: line 5>'     new lines depending on if it's too long or not.
 #
-#              vvvvv If you don't understand any of this, try to learn from the example below! vvvvv
+# More information can be found here: https://github.com/CyberedCake/MBorder/wiki
 
 
 enabled: true
@@ -50,6 +50,7 @@ starterItems:
       - 'paginate:&7A starter item created by &aCyberedCake &7in &dMBorder &7as a default item.'
       - ' '
       - '&fChange this in the &bconfig.yml&f!'
+    hideNBT: true
   STONE_SHOVEL:
     amount: 1
     customName: '&fMBorder Stone Shovel'
@@ -57,6 +58,7 @@ starterItems:
       - 'paginate:&7A starter item created by &aCyberedCake &7in &dMBorder &7as a default item.'
       - ' '
       - '&fChange this in the &bconfig.yml&f!'
+    hideNBT: true
   STONE_PICKAXE:
     amount: 1
     customName: '&fMBorder Stone Pickaxe'
@@ -64,6 +66,7 @@ starterItems:
       - 'paginate:&7A starter item created by &aCyberedCake &7in &dMBorder &7as a default item.'
       - ' '
       - '&fChange this in the &bconfig.yml&f!'
+    hideNBT: true
   STONE_AXE:
     amount: 1
     customName: '&fMBorder Stone Axe'
@@ -71,6 +74,7 @@ starterItems:
       - 'paginate:&7A starter item created by &aCyberedCake &7in &dMBorder &7as a default item.'
       - ' '
       - '&fChange this in the &bconfig.yml&f!'
+    hideNBT: true
   APPLE:
     amount: 16
     customName: '&fMBorder Apples'
@@ -78,3 +82,11 @@ starterItems:
       - 'paginate:&7A starter item created by &aCyberedCake &7in &dMBorder &7as a default item.'
       - ' '
       - '&fChange this in the &bconfig.yml&f!'
+    hideNBT: true
+
+
+
+
+
+itemsVersion: 1.0.0
+# Do not change!!!!!

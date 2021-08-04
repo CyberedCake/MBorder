@@ -5,6 +5,7 @@ api-version: 1.17
 authors: [ CyberedCake ]
 description: A recreation of the Minehut server "Wife"'s moving border mechanics
 website: https://github.com/CyberedCake/MBorder
+prefix: 'MBorder'
 
 permissions:
   mborder.*:
@@ -15,6 +16,7 @@ permissions:
       - mborder.command.toggleactive: true
       - mborder.command.tpmob: true
       - mborder.command.nextautorespawn: true
+      - mborder.command.defaultitems: true
   mborder.command.reload:
     description: Allowing a player this permission will give them the ability to use /mborder reload
     default: op
@@ -30,6 +32,9 @@ permissions:
   mborder.command.nextautorespawn:
     description: Allowing a player this permission will give them the ability to use /mborder nextautorespawn
     default: not op
+  mborder.command.defaultitems:
+    description: Allowing a player this permission will give them the ability to use /mborder defaultitems
+    default: op
 
 commands:
   mborder:

@@ -1,6 +1,7 @@
 package net.cybercake.mborder.Commands;
 
 import net.cybercake.mborder.Commands.SubCommands.*;
+import net.cybercake.mborder.DefaultItems;
 import net.cybercake.mborder.Utils.Utils;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.chat.*;
@@ -34,6 +35,7 @@ public class CommandManager implements CommandExecutor, TabCompleter {
         subcommands.add(new ToggleActive());
         subcommands.add(new TPMob());
         subcommands.add(new NextAutoRespawn());
+        subcommands.add(new DefaultItemsCMD());
     }
 
     // Note for later: please clan this up and remove the arrow code :D

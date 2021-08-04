@@ -15,9 +15,11 @@ import org.bukkit.Location;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Entity;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
+
 import java.util.UUID;
 
 public final class Main extends JavaPlugin {
@@ -51,7 +53,6 @@ public final class Main extends JavaPlugin {
         if(!getConfig().getBoolean("enabled")) { disablePlugin(); return; }
 
         if(!DataUtils.getCustomYmlFile("data").exists()) { saveResource("data.yml", false); }
-        if(!DataUtils.getCustomYmlFile("default-items").exists()) { saveResource("default-items.yml", false); }
 
         if(!getConfig().getBoolean("persistent")) {
             TrackEntity.disableGame();
@@ -72,6 +73,8 @@ public final class Main extends JavaPlugin {
         saveDefaultConfig();
         reloadConfig();
 
+        DefaultItems.saveDefaultItems();
+        DefaultItems.reloadItems();
         registerCommand("mborder", new CommandManager());
 
         registerTabCompleter("mborder", new CommandManager());
