@@ -6,15 +6,22 @@
 # ██║░╚═╝░██║██████╦╝╚█████╔╝██║░░██║██████╔╝███████╗██║░░██║
 # ╚═╝░░░░░╚═╝╚═════╝░░╚════╝░╚═╝░░╚═╝╚═════╝░╚══════╝╚═╝░░╚═╝
 #
-#        A plugin that will mimic the mechanics of the
+#         A plugin that mimics the mechanics of the
 #    Minehut server "Wife"'s WorldBorder (wife.minehut.gg)
 #
+#
+#  ▒█▀▀█ ▒█▀▀▀█ ▒█▄░▒█ ▒█▀▀▀ ▀█▀ ▒█▀▀█
+#  ▒█░░░ ▒█░░▒█ ▒█▒█▒█ ▒█▀▀▀ ▒█░ ▒█░▄▄
+#  ▒█▄▄█ ▒█▄▄▄█ ▒█░░▀█ ▒█░░░ ▄█▄ ▒█▄▄█.yml
+#
+# If you find any bugs, please report them to https://github.com/CyberedCake/MBorder/issues
+
 
 enabled: true
 # Set this value to 'false' if you want the plugin to disable itself upon starting up
 # NOTE #1: This just disables the plugin and will not reset the WorldBorder, kill the pig
 #          or do anything along those lines. This isn't really meant to be used to be honest.
-# NOTE #2: This requires a restart to take effect
+# NOTE #2: This requires a restart to take effect.
 
 updateWorldBorderInterval: 1
 # How long the WorldBorder gets the location of the animal and sets worldborder
@@ -83,6 +90,7 @@ nether:
 
   worldBorderAnimalSilent: false
   # Determines if the WorldBorder animal is silent or not
+
 
 
 

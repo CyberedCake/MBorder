@@ -51,6 +51,7 @@ public final class Main extends JavaPlugin {
         if(!getConfig().getBoolean("enabled")) { disablePlugin(); return; }
 
         if(!DataUtils.getCustomYmlFile("data").exists()) { saveResource("data.yml", false); }
+        if(!DataUtils.getCustomYmlFile("default-items").exists()) { saveResource("default-items.yml", false); }
 
         if(!getConfig().getBoolean("persistent")) {
             TrackEntity.disableGame();

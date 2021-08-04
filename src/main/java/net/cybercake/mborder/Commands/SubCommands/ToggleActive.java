@@ -47,6 +47,9 @@ public class ToggleActive extends SubCommand {
                 spawnEntity("nether", entitynether);
                 DataUtils.setCustomYml("data", "server.nether.mobUUID", entitynether.getUniqueId().toString());
 
+                Bukkit.getOnlinePlayers().forEach(player -> player.teleport(Utils.getTopBlock(new Location(p.getWorld(), p.getLocation().getX(), 0, p.getLocation().getZ(), 0, 0), 120)));
+                Bukkit.getOnlinePlayers().forEach(player -> player.sendMessage(Utils.chat("&a&lMBORDER GAME ENABLED!\n&7&oThe game has been started by &e" + p.getName())));
+
                 p.sendMessage(Utils.chat("&a&lGAME ENABLED!"));
                 p.sendMessage(Utils.chat("&7&oThe game has started with the center being your location!"));
             }else if(DataUtils.getCustomYmlBoolean("data", "server.active")) {

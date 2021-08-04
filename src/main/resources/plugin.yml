@@ -20,7 +20,7 @@ permissions:
     default: op
   mborder.command.coordscheck:
     description: Allowing a player this permission will give them the ability to use /mborder coordscheck
-    default: op
+    default: not op
   mborder.command.toggleactive:
     description: Allowing a player this permission will give them the ability to use /mborder toggleactive
     default: op

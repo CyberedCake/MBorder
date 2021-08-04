@@ -36,6 +36,8 @@ public class CommandManager implements CommandExecutor, TabCompleter {
         subcommands.add(new NextAutoRespawn());
     }
 
+    // Note for later: please clan this up and remove the arrow code :D
+
     @Override
     public boolean onCommand(@NotNull CommandSender sender, Command command, String label, String[] args) {
         if(getSubCommandsOnlyWithPerms(sender).size() <= 1) {
