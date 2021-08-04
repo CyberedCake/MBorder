@@ -5,7 +5,8 @@ import net.cybercake.mborder.Commands.CommandManager;
 import net.cybercake.mborder.Commands.SubCommands.ToggleActive;
 import net.cybercake.mborder.Listeners.EntityDeath;
 import net.cybercake.mborder.Listeners.EntityDamageByEntity;
-import net.cybercake.mborder.Listeners.PlayerJoin;
+import net.cybercake.mborder.Listeners.PlayerJoinDefaultItems;
+import net.cybercake.mborder.Listeners.PlayerJoinStart;
 import net.cybercake.mborder.RepeatingTasks.RespawnMob;
 import net.cybercake.mborder.RepeatingTasks.TrackEntity;
 import net.cybercake.mborder.Utils.DataUtils;
@@ -15,7 +16,6 @@ import org.bukkit.Location;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Entity;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -64,7 +64,7 @@ public final class Main extends JavaPlugin {
             DataUtils.setCustomYml("data", "server.nether.mobUUID", 0);
         }else if(getConfig().getBoolean("persistent")) {
             if(Bukkit.getOnlinePlayers().size() >= 1) {
-                PlayerJoin.justStarted();
+                PlayerJoinStart.justStarted();
             }else{
                 justStarted = true;
             }
@@ -82,8 +82,9 @@ public final class Main extends JavaPlugin {
 
         registerListener(new CommandListeners());
         registerListener(new EntityDeath());
-        registerListener(new PlayerJoin());
+        registerListener(new PlayerJoinStart());
         registerListener(new EntityDamageByEntity());
+        registerListener(new PlayerJoinDefaultItems());
 
         registerRunnable(new TrackEntity(), Main.getMainConfig().getLong("updateWorldBorderInterval"));
         registerRunnable(new RespawnMob(), 40);
