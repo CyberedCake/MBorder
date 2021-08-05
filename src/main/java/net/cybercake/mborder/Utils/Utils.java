@@ -237,9 +237,9 @@ public class Utils {
     public static Location getTopBlock(Location checkEmpty) {
         checkEmpty.setY(255.0);
         for(int i=0; i<255; i++) {
-            if(checkEmpty.getWorld().getBlockAt(checkEmpty).isPassable()) {
+            if(!checkEmpty.getWorld().getBlockAt(checkEmpty).isEmpty()) {
                 checkEmpty.setY(checkEmpty.getY()-1);
-            }else if(!checkEmpty.getWorld().getBlockAt(checkEmpty).isPassable()) {
+            }else if(checkEmpty.getWorld().getBlockAt(checkEmpty).isEmpty()) {
                 checkEmpty.setY(checkEmpty.getY()+1);
                 return checkEmpty;
             }
@@ -250,9 +250,11 @@ public class Utils {
     public static Location getTopBlock(Location checkEmpty, long yStartChecking) {
         checkEmpty.setY(yStartChecking);
         for(int i=0; i<yStartChecking; i++) {
-            if(checkEmpty.getWorld().getBlockAt(checkEmpty).isPassable()) {
-                checkEmpty.setY(checkEmpty.getY()-1);
-            }else if(!checkEmpty.getWorld().getBlockAt(checkEmpty).isPassable()) {
+            if(checkEmpty.getWorld().getBlockAt(checkEmpty).isEmpty()) {
+                checkEmpty.setY(checkEmpty.getY() - 1);
+            }else if(!checkEmpty.getWorld().getBlockAt(new Location(checkEmpty.getWorld(), checkEmpty.getX(), checkEmpty.getY()+1, checkEmpty.getZ(), checkEmpty.getYaw(), checkEmpty.getPitch())).isEmpty()) {
+                checkEmpty.setY(checkEmpty.getY() - 1);
+            }else if(!checkEmpty.getWorld().getBlockAt(checkEmpty).isEmpty()) {
                 checkEmpty.setY(checkEmpty.getY()+1);
                 return checkEmpty;
             }
@@ -344,11 +346,11 @@ public class Utils {
         int characters = 30;
         for(double i=0; i<characters; i++) {
             if(percentage > percentageSoFar) {
-                progress = progress + used + ChatColor.STRIKETHROUGH + spaceCharacter;
+                progress = progress + used + spaceCharacter;
             }else if(percentage <= percentageSoFar) {
-                progress = progress + unused + ChatColor.STRIKETHROUGH + spaceCharacter;
+                progress = progress + unused + spaceCharacter;
             }else{
-                progress = progress + "&8&m" + spaceCharacter;
+                progress = progress + "&8" + spaceCharacter;
             }
             percentageSoFar = i / characters;
         }
@@ -360,9 +362,9 @@ public class Utils {
         double percentageSoFar = 0.0;
         for(double i=0; i<characters; i++) {
             if(percentage > percentageSoFar) {
-                progress = progress + used + ChatColor.STRIKETHROUGH + spaceCharacter;
+                progress = progress + used + spaceCharacter;
             }else if(percentage <= percentageSoFar) {
-                progress = progress + unused + ChatColor.STRIKETHROUGH + spaceCharacter;
+                progress = progress + unused + spaceCharacter;
             }else{
                 progress = progress + "&8&m" + spaceCharacter;
             }
