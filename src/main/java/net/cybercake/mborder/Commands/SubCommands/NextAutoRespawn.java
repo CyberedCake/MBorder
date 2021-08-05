@@ -45,7 +45,7 @@ public class NextAutoRespawn extends SubCommand {
             double getTimeLeft = Utils.getUnix() - DataUtils.getCustomYmlLong("data", "server.activeStart");
             double getTimeMax = Main.getMainConfig().getLong("mobRespawnInterval");
             double percentage = getTimeLeft / getTimeMax;
-            p.sendMessage(Utils.chat(Utils.getProgressBar(ChatColor.AQUA, ChatColor.WHITE, percentage, " ", 57)));
+            p.sendMessage(Utils.chat(Utils.getProgressBar(ChatColor.AQUA, ChatColor.WHITE, percentage, "|", 115)));
 
             p.sendMessage(" ");
 

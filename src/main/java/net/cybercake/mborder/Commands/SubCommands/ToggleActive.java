@@ -32,7 +32,7 @@ public class ToggleActive extends SubCommand {
             Player p = (Player) sender;
             if(!DataUtils.getCustomYmlBoolean("data", "server.active")) {
                 Location locationOverworld = Utils.getTopBlock(new Location(getMainWorld(), p.getLocation().getX(), 0, p.getLocation().getZ(), 0, 0), 120);
-                Location locationNether = Utils.getTopBlock(new Location(Bukkit.getWorld(getMainWorldString() + "_nether"), p.getLocation().getX(), 0, p.getLocation().getZ(), 0, 0), 120);
+                Location locationNether = Utils.getTopBlock(new Location(Bukkit.getWorld(getMainWorldString() + "_nether"), p.getLocation().getX(), 0, p.getLocation().getZ(), 0, 0), 124);
 
                 DataUtils.setCustomYml("data", "server.active", true);
                 DataUtils.setCustomYml("data", "server.activeStart", Utils.getUnix());
@@ -62,6 +62,11 @@ public class ToggleActive extends SubCommand {
                 entityoverworld.remove();
                 Entity entitynether = Bukkit.getEntity(UUID.fromString(DataUtils.getCustomYmlString("data", "server.nether.mobUUID")));
                 entitynether.remove();
+                for(Player player : Bukkit.getOnlinePlayers()) {
+                    if(player == p) continue;
+                    player.sendMessage(Utils.chat("&c&lMBORDER GAME DISABLED!"));
+                    player.sendMessage(Utils.chat("&7&oThe game has been ended by &e" + p.getName()));
+                }
                 p.sendMessage(Utils.chat("&c&lGAME DISABLED!"));
                 p.sendMessage(Utils.chat("&7&oThe game has been ended!"));
             }

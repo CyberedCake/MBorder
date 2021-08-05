@@ -16,6 +16,7 @@ public class PlayerJoinStart implements Listener {
     @EventHandler
     public void playerJoin(PlayerJoinEvent e) {
         if(DataUtils.getCustomYmlBoolean("data", "server.active")) return;
+        if(!DataUtils.getCustomYmlBoolean("data", "server.activeOnRestart")) return;
         if(!Main.justStarted) return;
 
         Main.justStarted = false;
@@ -24,10 +25,6 @@ public class PlayerJoinStart implements Listener {
             System.out.println("Successfully started the game again because persistence in the config is set to 'true'!");
         } catch (Exception ex) {
             DataUtils.setCustomYml("data", "server.active", false);
-            Bukkit.getLogger().severe("MBorder: An error occurred whilst attempting to respawn mobs from the last server instance, disabling game...");
-            Bukkit.getLogger().severe(" ");
-            Bukkit.getLogger().severe("Stack trace is below:");
-            Utils.printBetterStackTrace(ex);
         }
     }
 
