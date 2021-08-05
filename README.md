@@ -22,6 +22,8 @@ about that command.
 
 `/mborder nextautorespawn` - Allows you to see when the next auto-respawn of the mob will be. **[Permission: mborder.command.nextautorespawn]**
 
+`/mborder defaultitems [player]` - Gives yourself or another player the default items, specified in default-items.yml. **[Permission: mborder.command.defaultitems]**
+
 `/mborder update` - Checks if there is an update to the plugin. If there is, it will provide a download link to the latest version. **[Permission:
 mborder.command.update]**
 
