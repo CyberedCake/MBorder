@@ -6,5 +6,4 @@
 - Join/leave/death messages
 
 ## Plugin Package
-- Starter tools, basic stone tools + apples ... make configurable
-- ~~Fix MBorder entities being able to go through portals~~ [Fixed by setting portal cooldown to 1 every tick]
+- Spawn method
