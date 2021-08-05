@@ -28,6 +28,7 @@ public final class Main extends JavaPlugin {
     public static boolean luckperms = false;
 
     public static boolean justStarted;
+
     private static Main plugin;
 
     @Override
@@ -36,9 +37,7 @@ public final class Main extends JavaPlugin {
 
         String serverVersion = getServer().getClass().getPackage().getName();
         String version = serverVersion.substring(serverVersion.lastIndexOf('.') + 1);
-
         if(!version.equals("v1_17_R1")) {
-            getLogger().severe(" ");
             getLogger().severe("--- PLUGIN DISABLED ----");
             getLogger().severe(" ");
             getLogger().severe(Utils.chat("The plugin MBorder only works on servers with versions &a1.17 or 1.17.1&c!"));
@@ -46,7 +45,6 @@ public final class Main extends JavaPlugin {
             getLogger().severe("Hopefully later, we will support all 1.16 versions. But for now, that is not the case");
             getLogger().severe(" ");
             getLogger().severe("--- PLUGIN DISABLED ----");
-            getLogger().severe(" ");
             getServer().getPluginManager().disablePlugin(this);
         }
 
@@ -63,11 +61,7 @@ public final class Main extends JavaPlugin {
             DataUtils.setCustomYml("data", "server.nether.centerLocation", new Location(Bukkit.getWorld(ToggleActive.getMainWorldString() + "_nether"), 0, 0, 0, 0, 0));
             DataUtils.setCustomYml("data", "server.nether.mobUUID", 0);
         }else if(getConfig().getBoolean("persistent")) {
-            if(Bukkit.getOnlinePlayers().size() >= 1) {
-                PlayerJoinStart.justStarted();
-            }else{
-                justStarted = true;
-            }
+            justStarted = true;
         }
 
         saveDefaultConfig();
@@ -95,8 +89,10 @@ public final class Main extends JavaPlugin {
 
     @Override
     public void onDisable() {
+        DataUtils.setCustomYml("data", "server.lastUpdateCheck", 0);
+
+        DataUtils.setCustomYml("data", "server.activeOnRestart", DataUtils.getCustomYmlBoolean("data", "server.active"));
         if(DataUtils.getCustomYmlBoolean("data", "server.active")) {
-            DataUtils.setCustomYml("data", "server.activeOnRestart", true);
             try {
                 Entity entityOverworld = Bukkit.getEntity(UUID.fromString(DataUtils.getCustomYmlString("data", "server.overworld.mobUUID")));
                 Entity entityNether = Bukkit.getEntity(UUID.fromString(DataUtils.getCustomYmlString("data", "server.nether.mobUUID")));

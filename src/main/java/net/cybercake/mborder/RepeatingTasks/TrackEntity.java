@@ -38,7 +38,6 @@ public class TrackEntity implements Runnable {
             }
             border.setDamageBuffer(Main.getMainConfig().getDouble("overworld.worldBorderBuffer"));
             border.setDamageAmount(Main.getMainConfig().getDouble("overworld.worldBorderDamage"));
-            border.setDamageAmount(Main.getMainConfig().getLong("overworld.worldBorderDamage"));
             border.setWarningDistance(5);
 
             DataUtils.setCustomYml("data", "server.overworld.centerLocation", overworldentity.getLocation());
@@ -65,7 +64,6 @@ public class TrackEntity implements Runnable {
             }
             border.setDamageBuffer(Main.getMainConfig().getDouble("nether.worldBorderBuffer"));
             border.setDamageAmount(Main.getMainConfig().getDouble("nether.worldBorderDamage"));
-            border.setDamageAmount(Main.getMainConfig().getLong("nether.worldBorderDamage"));
             border.setWarningDistance(5);
 
             DataUtils.setCustomYml("data", "server.nether.centerLocation", netherentity.getLocation());
