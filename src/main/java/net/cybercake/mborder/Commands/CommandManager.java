@@ -36,6 +36,7 @@ public class CommandManager implements CommandExecutor, TabCompleter {
         subcommands.add(new TPMob());
         subcommands.add(new NextAutoRespawn());
         subcommands.add(new DefaultItemsCMD());
+        subcommands.add(new Update());
     }
 
     // Note for later: please clan this up and remove the arrow code :D
