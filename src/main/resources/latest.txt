@@ -1,0 +1,2 @@
+latestVersion=1.0.0
+versionProtocol=1
