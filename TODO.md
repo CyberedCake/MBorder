@@ -6,4 +6,4 @@
 - Join/leave/death messages
 
 ## Plugin Package
-- Spawn method
+- Add custom drops, specifically drops from grass, grass block, oak log, coal, the ores {Coming in future versions}
