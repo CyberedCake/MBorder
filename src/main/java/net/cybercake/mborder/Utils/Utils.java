@@ -50,6 +50,14 @@ public class Utils {
 
     }
 
+    public static int getRandomInt(int minimum, int maximum) {
+        return (int)Math.floor(Math.random()*(maximum-minimum+1)+minimum);
+    }
+
+    public static double getRandomDouble(double minimum, double maximum) {
+        return (double)Math.floor(Math.random()*(maximum-minimum+1)+minimum);
+    }
+
     public static String getPrefix(Player p) {
         if(!Main.luckperms) {
             return "PLUGIN_NOT_FOUND:luckperms";

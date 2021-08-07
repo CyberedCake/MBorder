@@ -10,13 +10,16 @@ prefix: 'MBorder'
 permissions:
   mborder.*:
     description: Allowing a player this permission will give them all permissions for the MBorder plugin
+    default: op
     children:
-      - mborder.command.reload: true
-      - mborder.command.coordscheck: true
-      - mborder.command.toggleactive: true
-      - mborder.command.tpmob: true
-      - mborder.command.nextautorespawn: true
-      - mborder.command.defaultitems: true
+      - mborder.command.reload
+      - mborder.command.coordscheck
+      - mborder.command.toggleactive
+      - mborder.command.tpmob
+      - mborder.command.nextautorespawn
+      - mborder.command.defaultitems
+      - mborder.command.update
+      - mborder.command.tprandom
   mborder.command.reload:
     description: Allowing a player this permission will give them the ability to use /mborder reload
     default: op
@@ -29,11 +32,17 @@ permissions:
   mborder.command.tpmob:
     description: Allowing a player this permission will give them the ability to use /mborder tpmob
     default: op
+  mborder.command.tprandom:
+    description: Allowing a player this permission will give them the ability to use /mborder tprandom
+    default: op
   mborder.command.nextautorespawn:
     description: Allowing a player this permission will give them the ability to use /mborder nextautorespawn
     default: not op
   mborder.command.defaultitems:
     description: Allowing a player this permission will give them the ability to use /mborder defaultitems
+    default: op
+  mborder.command.update:
+    description: Allowing a player this permission will give them the ability to use /mborder update
     default: op
 
 commands:

@@ -3,10 +3,7 @@ package net.cybercake.mborder;
 import net.cybercake.mborder.Commands.CommandListeners;
 import net.cybercake.mborder.Commands.CommandManager;
 import net.cybercake.mborder.Commands.SubCommands.ToggleActive;
-import net.cybercake.mborder.Listeners.EntityDeath;
-import net.cybercake.mborder.Listeners.EntityDamageByEntity;
-import net.cybercake.mborder.Listeners.PlayerJoinDefaultItems;
-import net.cybercake.mborder.Listeners.PlayerJoinStart;
+import net.cybercake.mborder.Listeners.*;
 import net.cybercake.mborder.RepeatingTasks.RespawnMob;
 import net.cybercake.mborder.RepeatingTasks.TrackEntity;
 import net.cybercake.mborder.Utils.DataUtils;
@@ -62,13 +59,18 @@ public final class Main extends JavaPlugin {
             DataUtils.setCustomYml("data", "server.nether.mobUUID", 0);
         }else if(getConfig().getBoolean("persistent")) {
             justStarted = true;
+            if(Bukkit.getOnlinePlayers().size() > 0) {
+                justStarted = false;
+                PlayerJoinStart.justStarted();
+            }
         }
 
         saveDefaultConfig();
         reloadConfig();
-
         DefaultItems.saveDefaultItems();
         DefaultItems.reloadItems();
+        Messages.saveDefaultMessages();
+        Messages.reloadMessages();
 
         registerCommand("mborder", new CommandManager());
 
@@ -79,6 +81,7 @@ public final class Main extends JavaPlugin {
         registerListener(new PlayerJoinStart());
         registerListener(new EntityDamageByEntity());
         registerListener(new PlayerJoinDefaultItems());
+        registerListener(new PlayerJoinTeleport());
 
         registerRunnable(new TrackEntity(), Main.getMainConfig().getLong("updateWorldBorderInterval"));
         registerRunnable(new RespawnMob(), 40);
@@ -122,13 +125,12 @@ public final class Main extends JavaPlugin {
         Bukkit.getLogger().severe(" ");
     }
 
-
     public static Main getPlugin() { return plugin; }
     public static FileConfiguration getMainConfig() { return plugin.getConfig(); }
     public static String getPluginPrefix() { return getPlugin(Main.class).getDescription().getPrefix(); }
     public static void logInfo(String msg) { Bukkit.getLogger().info("[" + getPluginPrefix() + "] " + msg); }
     public static void logWarn(String msg) { Bukkit.getLogger().warning("[" + getPluginPrefix() + "] " + msg); }
-    public static void logError(String msg) { Bukkit.getLogger().severe("[" + getPluginPrefix() + "] " + msg); }
+    public static void logError(String msg) { Bukkit.getLogger().severe(msg); }
 
     public static void registerCommand(String name, CommandExecutor commandExecutor) { plugin.getCommand(name).setExecutor(commandExecutor); }
     public static void registerTabCompleter(String name, TabCompleter tabCompleter) { plugin.getCommand(name).setTabCompleter(tabCompleter); }
