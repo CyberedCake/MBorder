@@ -27,10 +27,10 @@ about that command.
 `/mborder update` - Checks if there is an update to the plugin. If there is, it will provide a download link to the latest version. **[Permission:
 mborder.command.update]**
 
-## Contact Me
-Need to contact me for some reason? View below!
+## Support? Contact information?
+If you need help with the plugin, or you need to contact me for some other generalized purpose, view below:
 
-------------
+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 
 **Discord:** CyberCake#9221
 
