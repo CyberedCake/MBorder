@@ -4,6 +4,7 @@ import net.cybercake.mborder.Commands.CommandManager;
 import net.cybercake.mborder.Commands.SubCommand;
 import net.cybercake.mborder.DefaultItems;
 import net.cybercake.mborder.Main;
+import net.cybercake.mborder.Messages;
 import net.cybercake.mborder.Utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -21,7 +22,7 @@ import java.util.List;
 public class DefaultItemsCMD extends SubCommand {
 
     public DefaultItemsCMD() {
-        super("defaultitems", "mborder.command.defaultitems", "Gives you the default starter items, defined in default-items.yml", "/mborder defaultitems [player]", new String[]{"starteritems", "items"});
+        super("defaultitems", "mborder.command.defaultitems", Messages.getMessagesCommands("defaultitems.description"), "/mborder defaultitems [player]", new String[]{"starteritems", "items"});
     }
 
     @Override
@@ -29,11 +30,11 @@ public class DefaultItemsCMD extends SubCommand {
         if(sender instanceof Player) {
             Player p = (Player) sender;
             if(!DefaultItems.getItems().getBoolean("enabled")) {
-                p.sendMessage(Utils.chat("&cGiving items to new players has been disabled in the &6default-items.yml&c, ask an administrator with the correct permissions to change it."));
+                p.sendMessage(Utils.chat(Messages.getMessagesCommands("defaultItems.itemsDisabled")));
                 return;
             }
             if(getCustomItems().size() <= 0) {
-                p.sendMessage(Utils.chat("&cCould not detect any custom items in the &6default-items.yml&c, try adding some?"));
+                p.sendMessage(Utils.chat(Messages.getMessagesCommands("defaultItems.couldNotDetectItems")));
                 return;
             }
 
@@ -43,15 +44,15 @@ public class DefaultItemsCMD extends SubCommand {
                 }
             } else if (args.length > 1) {
                 Player target = Bukkit.getPlayerExact(args[1]);
-                if(target == null) {p.sendMessage(Utils.chat("&cInvalid online player! &7" + this.getUsage())); return;}
+                if(target == null) {p.sendMessage(Utils.chat(Messages.getMessagesCommands("invalidOnlinePlayer", this.getUsage()))); return;}
 
-                p.sendMessage(Utils.chat("&fYou gave &e" + target.getName() + " &fthe default items!"));
+                p.sendMessage(Utils.chat(Messages.getMessagesCommands("defaultItems.gavePlayer", target.getName())));
                 for(ItemStack items : getCustomItems()) {
                     target.getInventory().addItem(items);
                 }
             }
         }else{
-            Main.logError("Only players can execute this sub-command!");
+            Main.logError(Messages.getMessagesCommands("onlyPlayers"));
         }
     }
 

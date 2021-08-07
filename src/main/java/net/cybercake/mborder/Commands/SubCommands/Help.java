@@ -2,6 +2,7 @@ package net.cybercake.mborder.Commands.SubCommands;
 
 import net.cybercake.mborder.Commands.CommandManager;
 import net.cybercake.mborder.Commands.SubCommand;
+import net.cybercake.mborder.Messages;
 import net.cybercake.mborder.Utils.Utils;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -10,7 +11,7 @@ import java.util.List;
 
 public class Help extends SubCommand {
 
-    public Help() { super("help", "", "Prints this help message.", "/mborder help", new String[]{"?", "info"}); }
+    public Help() { super("help", "", Messages.getMessagesCommands("help.description"), "/mborder help", new String[]{"?", "info"}); }
 
     @Override
     public void perform(CommandSender sender, String[] args, Command command) {

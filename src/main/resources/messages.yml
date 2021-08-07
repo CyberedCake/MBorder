@@ -1,0 +1,92 @@
+#
+# ███╗░░░███╗██████╗░░█████╗░██████╗░██████╗░███████╗██████╗░
+# ████╗░████║██╔══██╗██╔══██╗██╔══██╗██╔══██╗██╔════╝██╔══██╗
+# ██╔████╔██║██████╦╝██║░░██║██████╔╝██║░░██║█████╗░░██████╔╝
+# ██║╚██╔╝██║██╔══██╗██║░░██║██╔══██╗██║░░██║██╔══╝░░██╔══██╗
+# ██║░╚═╝░██║██████╦╝╚█████╔╝██║░░██║██████╔╝███████╗██║░░██║
+# ╚═╝░░░░░╚═╝╚═════╝░░╚════╝░╚═╝░░╚═╝╚═════╝░╚══════╝╚═╝░░╚═╝
+#
+#         A plugin that mimics the mechanics of the
+#    Minehut server "Wife"'s WorldBorder (wife.minehut.gg)
+#
+#
+#  ▒█▀▄▀█ ▒█▀▀▀ ▒█▀▀▀█ ▒█▀▀▀█ ░█▀▀█ ▒█▀▀█ ▒█▀▀▀ ▒█▀▀▀█
+#  ▒█▒█▒█ ▒█▀▀▀ ░▀▀▀▄▄ ░▀▀▀▄▄ ▒█▄▄█ ▒█░▄▄ ▒█▀▀▀ ░▀▀▀▄▄
+#  ▒█░░▒█ ▒█▄▄▄ ▒█▄▄▄█ ▒█▄▄▄█ ▒█░▒█ ▒█▄▄█ ▒█▄▄▄ ▒█▄▄▄█.yml
+#
+# If you find any bugs, please report them to https://github.com/CyberedCake/MBorder/issues
+
+
+messages:
+  general:
+    overworld: '&aoverworld'
+    nether: '&cnether'
+  mobs:
+    mobDeath: '&fThe {0} &fmob has died, respawning it...'
+    mobAutoRespawned: '&fThe {0} &fmob has been respawned in &e{1}&f!'
+  commands:
+    unknown:
+      main: '&cUnknown {0}: &8{1}'
+      argument: 'argument'
+      subCommand: 'sub-command'
+    invalidUsage: '&cInvalid usage! &7{0}'
+    invalidInteger: '&cInvalid integer! &7{0}'
+    invalidOnlinePlayer: '&cInvalid online player! &7{0}'
+    onlyPlayers: 'Only players can execute this sub-command!' # Color codes not supported
+    noPermission: '&cYou don''t have permission to use this!'
+    help:
+      description: 'Prints this help message.'
+    coordsCheck:
+      description: 'Gets the distance between you and a certain location.' # Color codes not supported, requires restart
+      fromCenter: '&fYou are &e{0} &fblocks away from &athe center &8(&7x{1} y{2} z{3}&8)'
+      fromSpecific: '&fYou are &e{0} &fblocks away from &ax{1} y{2} z{3}&f!'
+    defaultItems:
+      description: 'Gives you the default starter items, defined in default-items.yml!' # Color codes not supported, requires restart
+      itemsDisabled: '&cGiving items to new players has been disabled in the &6default-items.yml&c, ask an administrator with the correct permissions to change it.'
+      couldNotDetectItems: '&cCould not detect any custom items in the &6default-items.yml&c, try adding some?'
+      gavePlayer: '&fYou gave &e{0} &fthe default items!'
+    nextAutoRespawn:
+      description: 'Allows you to see when the next auto-respawn will occur.' # Color codes not supported, requires restart
+      gameMustBeActive: '&cThe game must be active for you to view when the next respawn is!'
+      nextAutoRespawn: '&fThe next auto respawn will occur in &e{0}&f!'
+      respawnsEvery: '&fRespawns will always happen every &a{0}&f!'
+    reload:
+      description: 'Reloads the configuration files, including config.yml, default-items.yml, and messages.yml.' # Color codes not supported, requires restart
+      failed: '&cFailed to reload the configuration file! Try again later: &8{0}'
+      failedToFindFile: '&7&oFailed to find the {0} file... generating a new one!'
+      success: '&fSuccessfully reloaded the configuration file in &e{0}ms&f!'
+    tpMob:
+      description: 'Teleports you to one of the two active mobs.' # Color codes not supported, requires restart
+      gameMustBeActive: '&cThe game must be active for you to teleport to the entity!'
+      failed: '&cAn error occurred whilst trying to warp you to the {0} entity: &8{1}'
+      success: '&aYou teleported to the &r{0} &fentity!'
+    toggleActive:
+      description: 'Starts or stops the game.' # Color codes not supported, requires restart
+      gameEnabled: |
+        &r
+        &a&lMBORDER GAME ENABLED!
+        &7&oThe game has been started by &e{0}&r
+      gameDisabled: |
+        &r
+        &c&lMBORDER GAME DISABLED!
+        &7&oThe game has been stopped by &e{0}&r
+    update:
+      description: 'Checks if there is an update to the plugin. If there is, it will provide a download link to the latest version.' # Color codes not supported, requires restart
+      checkingVersion: '&f&oChecking version, please wait...'
+      runningLatest: '&aYou are running the latest version'
+      outdatedVersion: '&eYou are {0} version(s) behind'
+      customVersion: '&cUsing custom version, could not determine version difference'
+      errorOccurred: '&cAn error occurred whilst checking version difference'
+      checkAgain: '&7&oResetting the server.latest.lastUpdateCheck...'
+    tpRandom:
+      description: 'Teleports you randomly inside the current WorldBorder of your world.'
+      gameMustBeActive: '&cThe game must be active for you to teleport randomly!'
+      teleportedSelf: '&fYou teleported randomly in the WorldBorder!'
+      teleportedPlayer: '&fYou teleported &e{0} &frandomly in the WorldBorder!'
+
+
+
+
+
+messagesVersion: 1.0.0
+# Do not change!!!!!

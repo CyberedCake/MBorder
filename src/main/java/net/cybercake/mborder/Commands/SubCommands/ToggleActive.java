@@ -3,6 +3,7 @@ package net.cybercake.mborder.Commands.SubCommands;
 import net.cybercake.mborder.Commands.CommandManager;
 import net.cybercake.mborder.Commands.SubCommand;
 import net.cybercake.mborder.Main;
+import net.cybercake.mborder.Messages;
 import net.cybercake.mborder.Utils.DataUtils;
 import net.cybercake.mborder.Utils.Utils;
 import org.bukkit.*;
@@ -23,7 +24,7 @@ import java.util.UUID;
 public class ToggleActive extends SubCommand {
 
     public ToggleActive() {
-        super("toggleactive", "mborder.command.toggleactive", "Start or stop the game.", "/mborder toggleactive", new String[]{"start", "stop"});
+        super("toggleactive", "mborder.command.toggleactive", Messages.getMessagesCommands("toggleActive.description"), "/mborder toggleactive", new String[]{"start", "stop"});
     }
 
     @Override
@@ -48,14 +49,10 @@ public class ToggleActive extends SubCommand {
                 DataUtils.setCustomYml("data", "server.nether.mobUUID", entitynether.getUniqueId().toString());
 
                 for(Player player : Bukkit.getOnlinePlayers()) {
+                    player.sendMessage(Utils.chat(Messages.getMessagesCommands("toggleActive.gameEnabled", p.getName())));
                     if(player == p) continue;
-                    player.sendMessage(Utils.chat("&a&lMBORDER GAME ENABLED!"));
-                    player.sendMessage(Utils.chat("&7&oThe game has been started by &e" + p.getName()));
                     player.teleport(Utils.getTopBlock(new Location(p.getWorld(), p.getLocation().getX(), 0, p.getLocation().getZ(), p.getLocation().getPitch(), p.getLocation().getPitch()), 120));
                 }
-
-                p.sendMessage(Utils.chat("&a&lGAME ENABLED!"));
-                p.sendMessage(Utils.chat("&7&oThe game has started with the center being your location!"));
             }else if(DataUtils.getCustomYmlBoolean("data", "server.active")) {
                 DataUtils.setCustomYml("data", "server.active", false);
                 Entity entityoverworld = Bukkit.getEntity(UUID.fromString(DataUtils.getCustomYmlString("data", "server.overworld.mobUUID")));
@@ -63,14 +60,10 @@ public class ToggleActive extends SubCommand {
                 Entity entitynether = Bukkit.getEntity(UUID.fromString(DataUtils.getCustomYmlString("data", "server.nether.mobUUID")));
                 entitynether.remove();
                 for(Player player : Bukkit.getOnlinePlayers()) {
-                    if(player == p) continue;
-                    player.sendMessage(Utils.chat("&c&lMBORDER GAME DISABLED!"));
-                    player.sendMessage(Utils.chat("&7&oThe game has been ended by &e" + p.getName()));
+                    player.sendMessage(Utils.chat(Messages.getMessagesCommands("toggleActive.gameDisabled", p.getName())));
                 }
-                p.sendMessage(Utils.chat("&c&lGAME DISABLED!"));
-                p.sendMessage(Utils.chat("&7&oThe game has been ended!"));
             }
-        } else { Main.logError("Only players can execute this sub-command!"); }
+        } else { Main.logError(Messages.getMessagesCommands("onlyPlayers")); }
     }
 
     @Override

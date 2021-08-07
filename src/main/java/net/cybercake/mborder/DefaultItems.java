@@ -38,7 +38,7 @@ public class DefaultItems {
         try {
             getItems().save(configFile);
         } catch (IOException ex) {
-            Bukkit.getLogger().log(Level.SEVERE, "Could not save config to " + configFile, ex);
+            Bukkit.getLogger().log(Level.SEVERE, "Could not save default-items to " + configFile, ex);
         }
     }
 
