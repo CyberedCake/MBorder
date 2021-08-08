@@ -58,110 +58,11 @@ public class Utils {
         return (double)Math.floor(Math.random()*(maximum-minimum+1)+minimum);
     }
 
-    public static String getPrefix(Player p) {
-        if(!Main.luckperms) {
-            return "PLUGIN_NOT_FOUND:luckperms";
-        }
-        User user = LuckPermsProvider.get().getUserManager().getUser(p.getUniqueId());
-        String prefix = ChatColor.translateAlternateColorCodes('&', "&f");
-        if (user.getCachedData().getMetaData().getPrefix() != null) {
-            prefix = ChatColor.translateAlternateColorCodes('&', user.getCachedData().getMetaData().getPrefix());
-        }
-        return prefix;
-    }
-
-    public static String getPrefix(Player p, String prefixIfDefault) {
-        if(!Main.luckperms) {
-            return "PLUGIN_NOT_FOUND:luckperms";
-        }
-        User user = LuckPermsProvider.get().getUserManager().getUser(p.getUniqueId());
-        String prefix = ChatColor.translateAlternateColorCodes('&', prefixIfDefault);
-        if (user.getCachedData().getMetaData().getPrefix() != null) {
-            prefix = ChatColor.translateAlternateColorCodes('&', user.getCachedData().getMetaData().getPrefix());
-        }
-        return prefix;
-    }
-
-    public static String getSuffix(Player p) {
-        if(!Main.luckperms) {
-            return "PLUGIN_NOT_FOUND:luckperms";
-        }
-        User user = LuckPermsProvider.get().getUserManager().getUser(p.getUniqueId());
-        String suffix = ChatColor.translateAlternateColorCodes('&', "&f");
-        if(user.getCachedData().getMetaData().getSuffix() != null) {
-            suffix = ChatColor.translateAlternateColorCodes('&', user.getCachedData().getMetaData().getSuffix());
-        }
-        return suffix;
-    }
-
-    public static String getSuffix(Player p, String suffixIfDefault) {
-        if(!Main.luckperms) {
-            return "PLUGIN_NOT_FOUND:luckperms";
-        }
-        User user = LuckPermsProvider.get().getUserManager().getUser(p.getUniqueId());
-        String suffix = ChatColor.translateAlternateColorCodes('&', suffixIfDefault);
-        if(user.getCachedData().getMetaData().getSuffix() != null) {
-            suffix = ChatColor.translateAlternateColorCodes('&', user.getCachedData().getMetaData().getSuffix());
-        }
-        return suffix;
-    }
-
-    public static String getFormattedName(Player p) {
-        if(!Main.luckperms) {
-            return "PLUGIN_NOT_FOUND:luckperms";
-        }
-        User user = LuckPermsProvider.get().getUserManager().getUser(p.getUniqueId());
-        String prefix = ChatColor.translateAlternateColorCodes('&', "&f");
-        String suffix = ChatColor.translateAlternateColorCodes('&', "&f");
-        if (user.getCachedData().getMetaData().getPrefix() != null) {
-            prefix = ChatColor.translateAlternateColorCodes('&', user.getCachedData().getMetaData().getPrefix());
-        }
-        if(user.getCachedData().getMetaData().getSuffix() != null) {
-            suffix = ChatColor.translateAlternateColorCodes('&', user.getCachedData().getMetaData().getSuffix());
-        }
-        String name = prefix + p.getName() + suffix;
-        return name;
-    }
-
     public static String formatLong(long longNumber) {
         NumberFormat numberFormat = NumberFormat.getInstance();
         numberFormat.setGroupingUsed(true);
 
         return numberFormat.format(longNumber);
-    }
-
-    public static String getFormattedName(Player p, String prefixIfDefault) {
-        if(!Main.luckperms) {
-            return "PLUGIN_NOT_FOUND:luckperms";
-        }
-        User user = LuckPermsProvider.get().getUserManager().getUser(p.getUniqueId());
-        String prefix = ChatColor.translateAlternateColorCodes('&', prefixIfDefault);
-        String suffix = ChatColor.translateAlternateColorCodes('&', "&f");
-        if (user.getCachedData().getMetaData().getPrefix() != null) {
-            prefix = ChatColor.translateAlternateColorCodes('&', user.getCachedData().getMetaData().getPrefix());
-        }
-        if(user.getCachedData().getMetaData().getSuffix() != null) {
-            suffix = ChatColor.translateAlternateColorCodes('&', user.getCachedData().getMetaData().getSuffix());
-        }
-        String name = prefix + p.getName() + suffix;
-        return name;
-    }
-
-    public static String getFormattedName(Player p, String prefixIfDefault, String suffixIfDefault) {
-        if(!Main.luckperms) {
-            return "PLUGIN_NOT_FOUND:luckperms";
-        }
-        User user = LuckPermsProvider.get().getUserManager().getUser(p.getUniqueId());
-        String prefix = ChatColor.translateAlternateColorCodes('&', prefixIfDefault);
-        String suffix = ChatColor.translateAlternateColorCodes('&', suffixIfDefault);
-        if (user.getCachedData().getMetaData().getPrefix() != null) {
-            prefix = ChatColor.translateAlternateColorCodes('&', user.getCachedData().getMetaData().getPrefix());
-        }
-        if(user.getCachedData().getMetaData().getSuffix() != null) {
-            suffix = ChatColor.translateAlternateColorCodes('&', user.getCachedData().getMetaData().getSuffix());
-        }
-        String name = prefix + p.getName() + suffix;
-        return name;
     }
 
     public static boolean isInGroup(Player player, String group) {

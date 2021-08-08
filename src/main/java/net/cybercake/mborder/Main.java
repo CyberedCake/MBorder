@@ -21,9 +21,6 @@ import java.util.UUID;
 
 public final class Main extends JavaPlugin {
 
-    // vv "luckperms" may never be used but it's to tell the Utils class that luckperms does not exist
-    public static boolean luckperms = false;
-
     public static boolean justStarted;
 
     private static Main plugin;
