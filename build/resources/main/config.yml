@@ -1,0 +1,99 @@
+#
+# ███╗░░░███╗██████╗░░█████╗░██████╗░██████╗░███████╗██████╗░
+# ████╗░████║██╔══██╗██╔══██╗██╔══██╗██╔══██╗██╔════╝██╔══██╗
+# ██╔████╔██║██████╦╝██║░░██║██████╔╝██║░░██║█████╗░░██████╔╝
+# ██║╚██╔╝██║██╔══██╗██║░░██║██╔══██╗██║░░██║██╔══╝░░██╔══██╗
+# ██║░╚═╝░██║██████╦╝╚█████╔╝██║░░██║██████╔╝███████╗██║░░██║
+# ╚═╝░░░░░╚═╝╚═════╝░░╚════╝░╚═╝░░╚═╝╚═════╝░╚══════╝╚═╝░░╚═╝
+#
+#         A plugin that mimics the mechanics of the
+#    Minehut server "Wife"'s WorldBorder (wife.minehut.gg)
+#
+#
+#  ▒█▀▀█ ▒█▀▀▀█ ▒█▄░▒█ ▒█▀▀▀ ▀█▀ ▒█▀▀█
+#  ▒█░░░ ▒█░░▒█ ▒█▒█▒█ ▒█▀▀▀ ▒█░ ▒█░▄▄
+#  ▒█▄▄█ ▒█▄▄▄█ ▒█░░▀█ ▒█░░░ ▄█▄ ▒█▄▄█.yml
+#
+# If you find any bugs, please report them to https://github.com/CyberedCake/MBorder/issues
+
+
+enabled: true
+# Set this value to 'false' if you want the plugin to disable itself upon starting up
+# NOTE #1: This just disables the plugin and will not reset the WorldBorder, kill the pig
+#          or do anything along those lines. This isn't really meant to be used to be honest.
+# NOTE #2: This requires a restart to take effect.
+
+updateWorldBorderInterval: 1
+# How long the WorldBorder gets the location of the animal and sets worldborder
+# accordingly. This value is in ticks (20 ticks = 1 second), cannot go below 1.
+
+mobRespawnInterval: 1800
+# How long before the mob automatically gets respawned and teleported to the
+# highest block at which it is currently. This value is in seconds.
+
+persistent: false
+# Determines if the WorldBorder location, enabled status, etc. will be persistent
+# through restarts and server shut-downs
+
+mobsCannotKillPlayers: true
+# Mobs can damage but cannot kill players. If this option is set to true, the server
+# will not allow mobs to kill a player if they do more damage than the victim's health.
+
+overworld:
+  worldBorderSize: 100.0
+  # The size the WorldBorder will constantly be at
+
+  worldBorderColor: BLUE
+  # The color of the WorldBorder, possible colors are 'RED', 'BLUE', and 'GREEN'
+
+  worldBorderDamage: 0.5
+  # How much damage the WorldBorder does per block outside the border
+
+  worldBorderBuffer: 50.0
+  # How far out of the border you need to go in order to start taking damage
+  # (a.k.a. the 'buffer')
+
+  worldBorderAnimal: PIG
+  # The mob that will be in the middle of the WorldBorder
+
+  worldBorderAnimalName: '&aOverworld &b&lWorldBorder'
+  # The name of the mob at the center, set to 'empty' to remain none
+
+  worldBorderAnimalGlowing: true
+  # Determines if the WorldBorder animal will glow or not
+
+  worldBorderAnimalSilent: false
+  # Determines if the WorldBorder animal is silent or not
+
+nether:
+  worldBorderSize: 100.0
+  # The size the WorldBorder will constantly be at
+
+  worldBorderColor: RED
+  # The color of the WorldBorder, possible colors are 'RED', 'BLUE', and 'GREEN'
+
+  worldBorderDamage: 0.5
+  # How much damage the WorldBorder does per block outside the border
+
+  worldBorderBuffer: 50.0
+  # How far out of the border you need to go in order to start taking damage
+  # (a.k.a. the 'buffer')
+
+  worldBorderAnimal: STRIDER
+  # The mob that will be in the middle of the WorldBorder
+
+  worldBorderAnimalName: '&cNether &b&lWorldBorder'
+  # The name of the mob at the center, set to 'empty' to remain none
+
+  worldBorderAnimalGlowing: true
+  # Determines if the WorldBorder animal will glow or not
+
+  worldBorderAnimalSilent: false
+  # Determines if the WorldBorder animal is silent or not
+
+
+
+
+
+configVersion: 1.0.0
+# Do not change!!!!!

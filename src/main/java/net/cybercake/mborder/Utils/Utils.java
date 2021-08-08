@@ -1,8 +1,6 @@
 package net.cybercake.mborder.Utils;
 
 import net.cybercake.mborder.Main;
-import net.luckperms.api.LuckPermsProvider;
-import net.luckperms.api.model.user.User;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.BaseComponent;
