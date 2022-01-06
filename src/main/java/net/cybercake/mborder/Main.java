@@ -1,5 +1,6 @@
 package net.cybercake.mborder;
 
+import me.lucko.commodore.CommodoreProvider;
 import net.cybercake.mborder.Commands.CommandListeners;
 import net.cybercake.mborder.Commands.CommandManager;
 import net.cybercake.mborder.Commands.SubCommands.ToggleActive;
@@ -17,6 +18,7 @@ import org.bukkit.entity.Entity;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.io.IOException;
 import java.util.UUID;
 
 public final class Main extends JavaPlugin {
@@ -72,6 +74,14 @@ public final class Main extends JavaPlugin {
         registerCommand("mborder", new CommandManager());
 
         registerTabCompleter("mborder", new CommandManager());
+
+        if(CommodoreProvider.isSupported()) {
+            try {
+                RegisterBrigadier.registerCommodoreCommand(getServer().getPluginCommand("mborder"), "mborder");
+            } catch (IOException e) {
+                logError(getPluginPrefix() + " An error occurred whilst loading brigadier/commodore command: /mborder");
+            }
+        }
 
         registerListener(new CommandListeners());
         registerListener(new EntityDeath());
